@@ -1,7 +1,4 @@
 # 🐧Hetemit
-
-
-
 # Enumeration
 Nmap
 ```
@@ -109,3 +106,5 @@ whoami
 cmeeks
 sh-4.4$ 
 ```
+# Privilege escalation  
+Run linpeas and found we can write over a 
