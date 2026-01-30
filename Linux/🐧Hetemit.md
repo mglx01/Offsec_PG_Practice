@@ -20,7 +20,7 @@ PORT      STATE SERVICE     VERSION
 ```
 
 Found port 50000 running http with python  
-Then Gobuster to find subdirectory and got /verfiy
+Then use Gobuster to find subdirectory and got /verfiy
 ```
 ┌──(ming㉿kali)-[~/Downloads]
 └─$ gobuster dir -u http://192.168.129.117:50000 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
