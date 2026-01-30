@@ -3,6 +3,7 @@
 ```
 (ming㉿kali)-[~/Downloads]
 └─$ nmap -p- -T4 -sV 192.168.129.117
+
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-01-30 17:31 AEDT
 Nmap scan report for 192.168.129.117
 Host is up (0.24s latency).
