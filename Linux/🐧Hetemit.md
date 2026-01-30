@@ -1,4 +1,4 @@
-##### Tags: Writable-file SUID-l Python-Flask Web-enum
+##### Tags: `Writable file`  `SUID-l`  `Python Flask`  `Web-enum`
 
 # 🐧Hetemit🐧
 ## Enumeration
