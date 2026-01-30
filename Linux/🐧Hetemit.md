@@ -1,4 +1,4 @@
-##### Tags: #SystemdService #PrivEsc #WeakPermissions #SUID-Bash #Python-Flask
+##### Tags: Writable-file SUID-l Python-Flask Web-enum
 
 # 🐧Hetemit🐧
 ## Enumeration
