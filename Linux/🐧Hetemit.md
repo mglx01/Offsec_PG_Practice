@@ -22,8 +22,8 @@ PORT      STATE SERVICE     VERSION
 50000/tcp open  http        Werkzeug httpd 1.0.1 (Python 3.6.8)
 ```
 
-Found port 50000 running http with python
-Use Gobuster to find subdirectory and got /verfiy
+Found port 50000 running http with python  
+Then Gobuster to find subdirectory and got /verfiy
 ```
 ┌──(ming㉿kali)-[~/Downloads]
 └─$ gobuster dir -u http://192.168.129.117:50000 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
