@@ -106,8 +106,10 @@ whoami
 cmeeks
 sh-4.4$ 
 ```
-# Privilege escalation  
+# Privilege escalation
+```
 Run linpeas and found we can write over a pythonapp.service  
 ╔══════════╣ Permissions in init, init.d, systemd, and rc.d
 ╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#init-initd-systemd-and-rcd      
 You have write privileges over /etc/systemd/system/pythonapp.service   
+```
