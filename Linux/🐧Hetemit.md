@@ -67,7 +67,7 @@ Date: Fri, 30 Jan 2026 10:07:12 GMT
 
 25
 ```                                  
-# Initial foothold  
+## Initial foothold  
 
 Use python code to execute command whoami to confirm we have RCE
 
@@ -106,7 +106,7 @@ whoami
 cmeeks
 sh-4.4$ 
 ```
-# Privilege escalation
+## Privilege escalation
 ```
 Run linpeas and found we have write permission over a pythonapp.service  
 ╔══════════╣ Permissions in init, init.d, systemd, and rc.d
