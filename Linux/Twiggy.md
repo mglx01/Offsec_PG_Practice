@@ -1,4 +1,4 @@
-##### Tags: `Passwd-Overwrite`  `CVE-2020-11651`  `CVE-2020-11652`  `RCE`
+##### Tags: `Passwd-Overwrite`  `CVE-2020-11651`  `CVE-2020-11652`  `RCE`  `User-add`
 
 # 🐧Twiggy🐧
 ## Enumeration
