@@ -1,4 +1,4 @@
-##### Tags: `Writable file`  `SUID-l`  `Python Flask`  `Web-enum`
+##### Tags: `Passwd-Overwrite`  `CVE-2020-11651`  `CVE-2020-11652`  `RCE`
 
 # 🐧Twiggy🐧
 ## Enumeration
@@ -21,7 +21,8 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 406.01 seconds
 ```
 check the web and didn't have anything    
-then search ztmp exploit got the RCE script
+then search ztmp exploit got the RCE script  
+https://www.exploit-db.com/exploits/48421
 ```
 google search zmtp 2.0 exploit
 Exploit Title: Saltstack 3000.1 - Remote Code Execution
