@@ -115,4 +115,3 @@ Last login: Sat Jan 31 03:49:14 2026 from 192.168.45.208
 uid=0(root) gid=0(root) groups=0(root)
 ```
 And we got the root shell
-```
