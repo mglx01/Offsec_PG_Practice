@@ -23,5 +23,5 @@ Nmap done: 1 IP address (1 host up) scanned in 406.01 seconds
 check the web and didn't have anything  
 then search ztmp exploit got the RCE script
 ```
-(https://github.com/user-attachments/assets/66675ad8-9f5a-4e91-a08e-121dbfd70979)
+! [Description](https://github.com/user-attachments/assets/66675ad8-9f5a-4e91-a08e-121dbfd70979)
 ```
