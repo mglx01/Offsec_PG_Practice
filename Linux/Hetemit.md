@@ -179,6 +179,8 @@ User cmeeks may run the following commands on hetemit:
 ```
 $ nc -lvnp 80
 listening on [any] 80 ...
+
+
 connect to [192.168.45.167] from (UNKNOWN) [192.168.129.117] 41766
 id
 uid=0(root) gid=0(root) groups=0(root)
