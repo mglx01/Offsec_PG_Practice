@@ -11,12 +11,12 @@ PORT     STATE SERVICE VERSION
 6379/tcp open  redis   Redis key-value store 4.0.14
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
-port 6379 is running Redis 4.0.14
-search on github and found the script
-redis-master.py
-https://github.com/vulhub/redis-rogue-getshell?tab=readme-ov-file  
-exp.so
-https://github.com/n0b0dyCN/redis-rogue-server  
+port 6379 is running Redis 4.0.14      
+search on github and found the script   
+redis-master.py   
+https://github.com/vulhub/redis-rogue-getshell?tab=readme-ov-file     
+exp.so   
+https://github.com/n0b0dyCN/redis-rogue-server     
 
 Then run the script with revershell command
 ```
