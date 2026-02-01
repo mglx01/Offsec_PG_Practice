@@ -1,4 +1,4 @@
-##### Tags: `cronjob`  `CVE-2021–22204`  `searchsploit`  `User-add`
+##### Tags: `redis`  `CVE-2021-4034`  `searchsploit`  `github` 
 
 # 🐧BlackGate🐧
 ## Enumeration
