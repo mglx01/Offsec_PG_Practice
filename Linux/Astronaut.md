@@ -61,7 +61,7 @@ www-data@gravity:~/html/grav-admin$ id
 id
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
-## privilege escalation  
+## Privilege Escalation  
 search for SUID bit and found php
 ```
 $ find / -perm -4000 -type f 2>/dev/null
