@@ -107,7 +107,7 @@ User cassie may run the following commands on clue:
     (ALL) NOPASSWD: /usr/local/bin/cassandra-web
 ```
 so we are going to start a new cassandra session and login as root access to see sensetive file  
-we run another cassandra session in port 4000 and use the 47799.py script to login again as root access
+we run another cassandra session in port 8021 and use the 47799.py script to login again as root access
 ```
 cassie@clue:/home/anthony$ sudo /usr/local/bin/cassandra-web -B 0.0.0.0:8021 -u cassie -p SecondBiteTheApple330
 I, [2026-02-02T06:16:42.668428 #26588]  INFO -- : Establishing control connection
