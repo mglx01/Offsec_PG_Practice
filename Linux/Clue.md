@@ -59,8 +59,8 @@ cat 47799.txt
 ```
 but we need to password first    
 after a bit of research on goole    
-it says the password location is the default path of this configuration file is   /etc/freeswitch/autoload_configs/event_socket.conf.xml    
-then we use remote file read the password  
+it says the password location of this configuration file is   /etc/freeswitch/autoload_configs/event_socket.conf.xml    
+then we use remote file script to read the password  
 the passowrd is StrongClueConEight021  
 ```
 $ python3 49362.py 192.168.156.240 /etc/freeswitch/autoload_configs/event_socket.conf.xml
