@@ -1,4 +1,4 @@
-##### Tags: `SUID`  `php`  `searchsploit`  `GTFOBin`
+##### Tags: `ssh`  `burpsuite`  `keygen`  `web`
 
 # 🐧Boolean🐧
 ## Enumeration
