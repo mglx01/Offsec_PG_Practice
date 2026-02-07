@@ -94,6 +94,8 @@ dora@dora:/var/www/html/filemanager/config$ id
 id
 uid=1000(dora) gid=1000(dora) groups=1000(dora),6(disk)
 ```
+## Privilege Escalation  
+
 User dora is a group member of disk  
 In Linux, the disk group allows raw read/write access to sensitive data even you don't have permission  
 https://www.hackingarticles.in/disk-group-privilege-escalation/  
