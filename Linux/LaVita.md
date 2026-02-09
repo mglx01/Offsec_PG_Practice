@@ -1,6 +1,6 @@
 ##### Tags: `cornjob`  `pspy`  `writerable file`  `CVE-2021-3129`  `Laravel 8.4.0`  `sudo-l`
 
-# 🐧Law🐧
+# 🐧LaVita🐧
 ## Enumeration
 Nmap
 ```
