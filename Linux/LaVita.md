@@ -1,4 +1,4 @@
-##### Tags: `cornjob`  `burp suite`  `github`  `script`  `CVE-2022-35914`
+##### Tags: `cornjob`  `pspy`  `writerable file`  `CVE-2021-3129`  `Laravel 8.4.0`  `sudo-l`
 
 # 🐧Law🐧
 ## Enumeration
