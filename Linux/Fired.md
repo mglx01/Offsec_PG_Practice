@@ -68,6 +68,8 @@ INSERT INTO OFPROPERTY VALUES('mail.smtp.password','OpenFireAtEveryone',0,NULL)
 ```
 but smtp server is not running
 ```
+openfire@openfire:/$ netstat
+
 tcp        0    133 openfire:58364          192.168.45.166:ssh      ESTABLISHED
 tcp        0      0 openfire:47516          192.168.45.166:ssh      CLOSE_WAIT 
 tcp        0      0 openfire:56948          192.168.45.166:ssh      CLOSE_WAIT 
