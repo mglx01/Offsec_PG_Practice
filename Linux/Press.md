@@ -13,9 +13,9 @@ PORT     STATE SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 port 80 is a rabbit hole  
-port 8089 is running a flatpress web 
-use default credential admin password logged in successfully  
-search github and found we can upload a php revershell  
+port 8089 is running a flatpress web         
+use default credential admin password logged in successfully      
+search github and found we can upload a php revershell      
 ```
 https://github.com/flatpressblog/flatpress/issues/152
 ```
