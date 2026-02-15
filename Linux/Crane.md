@@ -1,4 +1,4 @@
-##### Tags: `sudo-l`  `GTFObins`  `github`  `default credential`
+##### Tags: `sudo-l`  `GTFObins`  `github`  `default credential` `service`
 
 # 🐧Crane🐧
 ## Enumeration
