@@ -1,4 +1,4 @@
-##### Tags: `CVE-2022-25765 `  `input`  `ruby`  `script` 
+##### Tags: `CVE-2022-25765 `  `input`  `ruby`  `script` `sudo-l`
 
 # 🐧RubyDome🐧
 ## Enumeration
