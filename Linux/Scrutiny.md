@@ -56,7 +56,7 @@ Login URL: http://teams.onlyrands.com/login.html/login.html
 ==================================================
 [+] Exploit completed!
 ```
-we got the username and password created - ibrahimsql ibrahimsql
+we got the username and password created - ibrahimsql ibrahimsql   
 after logged in and found there is a id_rsa private key in the project of Marco Tillman
 ```console
 Signed-off-by: Marco Tillman <marcot@onlyrands.com>
