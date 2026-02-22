@@ -1,4 +1,4 @@
-##### Tags: `jenkins`  `chisel`  `port-forwarding`  `passwd-reuse` 
+##### Tags: `jenkins`  `chisel`  `port-forwarding`  `passwd-reuse`  `SQL`
 
 # 🐧Vmdak🐧
 ## Enumeration
