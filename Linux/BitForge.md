@@ -91,7 +91,6 @@ index c1d2b96..0000000
 -$password = 'B1tForG3S0ftw4r3S0lutions';
 ```
 use credential to login to mysql  
-found the 
 ```console
 $ mysql -u BitForgeAdmin -p -h 192.168.215.186 --skip-ssl-verify-server-cert
 Enter password: B1tForG3S0ftw4r3S0lutions
