@@ -81,6 +81,7 @@ User www-data may run the following commands on walla:
 the wifi_reset.py file is own by root
 ```console
 www-data@walla:/tmp$ ls -la /home/walter/wifi_reset.py
+-rw-r--r-- 1 root root 251 Sep 17  2020 /home/walter/wifi_reset.py
 ```
 however we own the parent directory  
 ```console
