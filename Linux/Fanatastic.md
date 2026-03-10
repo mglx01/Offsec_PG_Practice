@@ -11,8 +11,8 @@ PORT      STATE    SERVICE VERSION
 3000/tcp  open     http    Grafana http
 9090/tcp  open     http    Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
 ```
-port 9090 is nothing intersted  
-port 3000 is running Grafana v8.3.0  (CVE-2021-43798)
+port 9090 is nothing intersted          
+port 3000 is running Grafana v8.3.0  (CVE-2021-43798)        
 https://github.com/mauricelambert/LabAutomationCVE-2021-43798  
 we can read file remotely, and found there is a sysadmin can login via ssh
 ```console
@@ -22,7 +22,7 @@ root:x:0:0:root:/root:/bin/bash
 sysadmin:x:1001:1001::/home/sysadmin:/bin/sh
 ```
 since we can read file, we will read the log file to find the passwd  
-https://github.com/jas502n/Grafana-CVE-2021-43798?tab=readme-ov-file  
+https://github.com/jas502n/Grafana-CVE-2021-43798?tab=readme-ov-file          
 from this instruction, we can find the password in /var/lib/grafana/grafana.db 
 but the output is too big, we redirect it to a txt file and check it
 ```console
