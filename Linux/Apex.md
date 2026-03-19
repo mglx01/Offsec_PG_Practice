@@ -131,7 +131,7 @@ $ john --wordlist=/home/ming/Downloads/rockyou.txt hash.txt
 Press 'q' or Ctrl-C to abort, almost any other key for status
 thedoctor        (?)
 ```
-login in the the webpage http://192.168.157.145/openemr/interface/login/login.php?site=default
+login in the the webpage http://192.168.157.145/openemr/interface/login/login.php?site=default        
 found the openemr Version Number: v5.0.1 (1)  
 search and found the exploit
 ```console
