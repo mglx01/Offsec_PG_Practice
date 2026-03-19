@@ -1,4 +1,4 @@
-##### Tags: `smb`  `mysql`  `PwnKit`  `john`
+##### Tags: `smb`  `mysql`  `PwnKit`  `john the ripper`
 
 # 🐧Apex🐧
 ## Enumeration
