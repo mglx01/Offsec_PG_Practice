@@ -119,7 +119,7 @@ $ cat sqlconf.php
 $login  = 'openemr';
 $pass   = 'C78maEQUIEuQ';
 ```
-found the username and password
+found the username and password of openemr
 ```console
 $ mysql -u openemr -p -h 192.168.157.145 --skip-ssl-verify-server-cert
 Enter password: C78maEQUIEuQ
