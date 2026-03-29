@@ -25,7 +25,7 @@ we found 8080 is running Wampserver
 
 there is a phpmyadmin login page  
 use default credential root null logged in successfully  
-we can upload file using SQL query
+we can create a upload php using SQL query
 ```console
 https://gist.github.com/BababaBlue/71d85a7182993f6b4728c5d6a77e669f
 ```
