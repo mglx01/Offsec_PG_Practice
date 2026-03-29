@@ -58,7 +58,7 @@ C:\wamp\www>whoami
 nt authority\local service
 ```
 ## Privilege Escalation
-we have SeImpersonatePrivilege
+we have SeImpersonatePrivilege privilege
 ```console
 C:\Users>whoami /priv
 
