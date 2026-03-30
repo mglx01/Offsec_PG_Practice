@@ -109,7 +109,7 @@ ariah@NICKEL C:\ftp>dir
 09/01/2020  11:02 AM            46,235 Infrastructure.pdf
 ```
 transfer to our local machine and found the file is password protected  
-so we crack it with pdfjohn
+so we crack it with pdf2john
 ```console
 $ pdf2john Infrastructure.pdf > pdf.hash 
 ```
