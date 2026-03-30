@@ -83,7 +83,8 @@ commandline : cmd.exe C:\windows\system32\DevTasks.exe --deploy C:\work\dev.yaml
               "Tm93aXNlU2xvb3BUaGVvcnkxMzkK" --server nickel-dev --protocol ssh
 
 ```
-the password seems encoded, so we use https://toolbox.googleapps.com/apps/encode_decode/  
+the password seems encoded  
+so we use https://toolbox.googleapps.com/apps/encode_decode/  
 use base64 decoder and got the password
 ```console
 NowiseSloopTheory139
