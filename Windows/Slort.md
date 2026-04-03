@@ -121,7 +121,7 @@ C:\WINDOWS\system32>whoami
 whoami
 slort\administrator
 ```
-we can just the password of admin and run psexec to become system
+we can change the password of administrator and run psexec to become system
 ```console
 C:\Users\Administrator\Desktop>net user Administrator 123
 The command completed successfully.
