@@ -93,7 +93,7 @@ C:\Users\viewer>whoami
 dvr4\viewer
 ```
 ## Privilege Escalation
-we can read the administrator password file in C:\ProgramData\PY_Software\Argus Surveillance DVR\DVRParams.ini 
+we can read the administrator password file in C:\ProgramData\PY_Software\Argus Surveillance DVR\DVRParams.ini  
 https://www.exploit-db.com/exploits/50130  
 ```console
 C:\ProgramData\PY_Software\Argus Surveillance DVR>type DVRParams.ini
