@@ -67,7 +67,7 @@ C:\Users\divine>type AppData\Roaming\FileZilla\recentservers.xml
         </RecentServers>
 </FileZilla3>
 ```
-base64 decode
+base64 decode the password
 ```console
 ControlFreak11
 ```
