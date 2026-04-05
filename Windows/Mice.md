@@ -67,6 +67,10 @@ C:\Users\divine>type AppData\Roaming\FileZilla\recentservers.xml
         </RecentServers>
 </FileZilla3>
 ```
+base64 decode
+```console
+ControlFreak11
+```
 port 3389 is open so we can login remotely  
 there is a privilege escalation for remote mouse  
 https://www.exploit-db.com/exploits/50047
