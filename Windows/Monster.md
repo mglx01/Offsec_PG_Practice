@@ -47,7 +47,7 @@ admin
 wazowski@monster.pg
 ```
 admin wazowski login successfully  
-for Monstra 3.0.4 we have RCE via Theme Blog
+for Monstra 3.0.4 we have RCE via Theme Blog  
 https://github.com/monstra-cms/monstra/issues/470  
 use a PHP Ivan Sincek to replace the Theme Blog and save it
 ```console
@@ -67,10 +67,8 @@ C:\xampp\htdocs\blog>whoami
 mike-pc\mike
 ```
 ## Privilege Escalation
-check the version of xampp
+check the version of xampp is running 7.3.10-1
 ```console
-c:\xampp>xampp-control.exe
-
 c:\xampp>type properties.ini
 [General]
 installdir=C:\xampp
