@@ -188,7 +188,7 @@ access\svc_mssql
 ```
 ## Privilege Escalation
 we have SeManageVolumePrivilege  
-we can abuse this can escalate to system  
+we can abuse this and escalate to system  
 https://oscp.adot8.com/windows-privilege-escalation/whoami-priv/semanagevolumeprivilege
 ```console
 C:\Windows\system32>whoami /priv
