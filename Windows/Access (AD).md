@@ -24,7 +24,7 @@ PORT      STATE SERVICE       VERSION
 9389/tcp  open  mc-nmf        .NET Message Framing
 47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
 ```
-this a active directory machine, many ports are opening  
+this is a active directory machine, many ports are opening  
 port 53 is dns but unable to connect  
 port 135,139,445 are rpc and smb unable to connect  
 port 80 and 443 are the same webpage, there is a buy tickets upload box  
