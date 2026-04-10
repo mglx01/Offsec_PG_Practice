@@ -97,7 +97,7 @@ Administrator            Guest                    krbtgt
 svc_apache               svc_mssql                
 The command completed successfully.
 ```
-we comfirmed it is a SPN account
+we comfirmed it is a SPN account 
 ```console
 PS C:\Users\svc_apache\Desktop> Get-netuser svc_mssql
 
