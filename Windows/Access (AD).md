@@ -152,7 +152,7 @@ hashcat (v6.2.6) starting
 
 trustno1
 ```
-the account is unable to login via winrm
+the account is unable to login via winrm even the port is opening
 ```console
 $ netexec winrm 192.168.162.187 -u 'svc_mssql' -p 'trustno1'
 
