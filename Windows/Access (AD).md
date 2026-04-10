@@ -1,4 +1,4 @@
-##### Tags: `AD`  `.htaccess`  `rebeus`  `Kerberoasting`  `Invoke-RunasCs.ps1`  `SeManageVolumePrivilege`
+##### Tags: `AD`  `.htaccess`  `rebeus`  `Kerberoasting`  `Invoke-RunasCs.ps1`  `SeManageVolumePrivilege`  `dll`
 
 # 🪟 Access (AD)🪟
 ## Enumeration
