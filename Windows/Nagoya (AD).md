@@ -250,25 +250,7 @@ SeIncreaseQuotaPrivilege      Adjust memory quotas for a process        Disabled
 SeMachineAccountPrivilege     Add workstations to domain                Disabled
 SeChangeNotifyPrivilege       Bypass traverse checking                  Enabled 
 SeManageVolumePrivilege       Perform volume maintenance tasks          Enabled 
-C:\Windows\system32>whoami /priv
-whoami /priv
 
-PRIVILEGES INFORMATION
-----------------------
-
-Privilege Name                Description                               State   
-============================= ========================================= ========
-SeAssignPrimaryTokenPrivilege Replace a process level token             Disabled
-SeIncreaseQuotaPrivilege      Adjust memory quotas for a process        Disabled
-SeMachineAccountPrivilege     Add workstations to domain                Disabled
-SeChangeNotifyPrivilege       Bypass traverse checking                  Enabled 
-SeManageVolumePrivilege       Perform volume maintenance tasks          Enabled 
-SeImpersonatePrivilege        Impersonate a client after authentication Enabled 
-SeCreateGlobalPrivilege       Create global objects                     Enabled 
-SeIncreaseWorkingSetPrivilege Increase a process working set            Disabled
-        Impersonate a client after authentication Enabled 
-SeCreateGlobalPrivilege       Create global objects                     Enabled 
-SeIncreaseWorkingSetPrivilege Increase a process working set            Disabled
 ```
 i chose SeImpersonatePrivilege  
 upload godpotato  
