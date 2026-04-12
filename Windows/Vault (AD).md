@@ -1,4 +1,4 @@
-##### Tags: `AD`  `kerbrute`  `rpc`  `ntlm_theft`  `SeRestorePrivilege`  `GPO permission abuse`  `responder`
+##### Tags: `AD`  `kerbrute`  `netexec`  `ntlm_theft`  `SeRestorePrivilege`  `GPO permission abuse`  `responder`
 
 # 🪟 Vault (AD)🪟
 ## Enumeration
