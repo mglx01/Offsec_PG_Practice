@@ -34,7 +34,7 @@ Service Info: Host: HUTCHDC; OS: Windows; CPE: cpe:/o:microsoft:windows
 ```
 port 80 is running webdav and we can upload files but we need username and password  
 we know the domain name of this machine is hutch.offsec from the namp scan port 389, 3268  
-we can do lapsearch for any users
+we can do ldapsearch for any users
 ```console
 $ ldapsearch -x -H ldap://192.168.119.122 -b "DC=hutch,DC=offsec"
 
