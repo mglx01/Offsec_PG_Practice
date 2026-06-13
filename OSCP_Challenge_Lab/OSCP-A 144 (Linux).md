@@ -185,7 +185,7 @@ chloe@oscp:/home$ id
 uid=1011(chloe) gid=1011(chloe) groups=1011(chloe),27(sudo)
 ```
 chloe is in sudo group  
-just sudo -i with escalate to root
+just sudo -i then escalate to root
 ```console
 chloe@oscp:/home$ sudo -i
 [sudo] password for chloe: Ee24zIK4cDhJHL4H
