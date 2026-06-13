@@ -1,4 +1,4 @@
-##### Tags: `sqli`  `sudo-l`  `webenum`  `GTFOBin`
+##### Tags: `Aerospike`  `cronjob`  `writrable file` 
 
 # 🐧OSCP-A (aero)🐧
 ## Enumeration
@@ -109,6 +109,8 @@ pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
     ░░       ░  ░  ░  ░░       ▒ ▒ ░░  
                    ░           ░ ░     
                                ░ ░     
+
+2026/06/13 06:52:01 CMD: UID=0     PID=63021  | python /bin/asinfo -v STATUS
 
 2026/06/13 06:53:01 CMD: UID=0     PID=63041  | python /bin/asinfo -v STATUS
 ```
