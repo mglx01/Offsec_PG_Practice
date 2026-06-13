@@ -34,7 +34,7 @@ Starting gobuster in directory enumeration mode
 ===============================================================
 /.git/HEAD            (Status: 200) [Size: 21]
 ```
-use git_dumper to dumper the data of the page
+use git_dumper to dump the data of the page
 ```console
 $ python3 git_dumper.py http://192.168.158.144/.git/ dir
 [-] Testing http://192.168.158.144/.git/HEAD [200]
