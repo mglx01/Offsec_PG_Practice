@@ -1,6 +1,6 @@
 ##### Tags: `Aerospike`  `cronjob`  `writrable file` 
 
-# 🐧OSCP-A (aero)🐧
+# 🐧OSCP-A (Aero)🐧
 ## Enumeration
 Nmap
 ```console
