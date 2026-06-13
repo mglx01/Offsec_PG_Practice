@@ -1,6 +1,6 @@
 ##### Tags: `.git`  `adm`  `sudo -i`  `zip2john`  `cms`
 
-# 🐧OSCP-A Crystal🐧
+# 🐧OSCP-A (Crystal)🐧
 ## Enumeration
 Nmap
 ```console
