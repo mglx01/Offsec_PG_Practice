@@ -1,6 +1,6 @@
 ##### Tags: `snmp`  `id_rsa`  `DirtyPipe` 
 
-# 🐧OSCP-A (Kiero)🐧
+# 🐧OSCP-B (Kiero)🐧
 ## Enumeration
 Nmap
 ```console
