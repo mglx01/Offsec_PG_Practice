@@ -1,6 +1,6 @@
 ##### Tags: `FreeSWITCH`  `SeImpersonatePrivilege` 
 
-# 🪟OSCP-A (Gust)🪟
+# 🪟OSCP-B (Gust)🪟
 ## Enumeration
 Nmap
 ```console
