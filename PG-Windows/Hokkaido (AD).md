@@ -1,6 +1,6 @@
 ##### Tags: `AD`  `kerbrute`  `rpc`  `Kerberoasting`  `mssql`  `SeBackupPrivilege`  `pass the hash`
 
-# 🪟 hokkaido (AD)🪟
+# 🪟 Hokkaido (AD)🪟
 ## Enumeration
 Nmap
 ```console
