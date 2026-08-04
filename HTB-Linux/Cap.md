@@ -24,7 +24,8 @@ Content-Length: 19386
 ```
 when we click security snapshot on the webpage  
 it redirect us to http://10.129.244.181/data/1 but returns 0 output  
-we changed 1 to 0 and  got some result we can download
+we changed 1 to 0 and  got some result we can download  
+which is a classic IDOR vulnerability 
 ```console
 http://10.129.244.181/data/0
 
