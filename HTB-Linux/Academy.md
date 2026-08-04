@@ -1,4 +1,4 @@
-##### Tags: `brute force`  `burp suite`  `Metasploit`  `adm`  `composer' `password spraying`
+##### Tags: `brute force`  `burp suite`  `Metasploit`  `adm`  `composer` `password spraying`
 
 # 🐧Academy🐧
 ## Enumeration
