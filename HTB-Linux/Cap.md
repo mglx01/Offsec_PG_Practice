@@ -46,7 +46,7 @@ uid=1001(nathan) gid=1001(nathan) groups=1001(nathan)
 ```
 ## Privilege Escalation
 python3.8 has cap_setuid capabilities  
-which Allows the binary to change its user ID (UID), meaning we can switch to the root user (UID 0).
+which allows the binary to change its user ID (UID), meaning we can switch to the root user (UID 0).
 ```console
 nathan@cap:~$ getcap -r / 2>/dev/null
 /usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip
