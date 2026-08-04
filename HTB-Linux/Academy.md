@@ -134,6 +134,7 @@ Password:mrb3n_Ac@d3my!
 mrb3n@academy:/tmp$ id
 uid=1001(mrb3n) gid=1001(mrb3n) groups=1001(mrb3n)
 ```
+## Privilege Escalation
 sudo -l found mrb3n can run composer as root
 ```console
 mrb3n@academy:/tmp$ sudo -l
