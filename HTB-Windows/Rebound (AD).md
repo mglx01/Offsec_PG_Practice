@@ -163,7 +163,7 @@ when we run runascs.exe we can see tbrady is on this machine
 >services                                    0  Disc
  console           tbrady                    1  Active
 ```
-we set network relay
+we set up network relay
 ```console
 #Attacker machine
 
