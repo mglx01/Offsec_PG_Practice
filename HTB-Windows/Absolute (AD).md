@@ -178,7 +178,7 @@ drw-rw-rw-          0  Fri Sep  2 03:02:23 2022 ..
 -rw-rw-rw-      67584  Fri Sep  2 03:02:23 2022 test.exe
 ```
 run test.exe and use wireshark to capture it and found _ldap._tcp.dc.absolute.htb  
-add it and run the test.exe again  
+add it to the host and run the test.exe again  
 found the plaintext credential in wireshark m.lovegod:AbsoluteLDAP2022!  
 is vaild for Kerberos authentication 
 ```console
