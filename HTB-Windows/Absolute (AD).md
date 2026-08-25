@@ -23,7 +23,7 @@ PORT      STATE SERVICE       VERSION
 47001/tcp open  http          Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
 Service Info: Host: DC; OS: Windows; CPE: cpe:/o:microsoft:windows
 ```
-found 6 images in the website
+found 6 images on the website
 ```console
 $ feroxbuster -u http://10.129.232.60 -w /usr/share/wordlists/dirb/common.txt -x php,txt,xml,zip -C 404
                                                                                                                                     
